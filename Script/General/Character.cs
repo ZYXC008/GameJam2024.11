@@ -12,6 +12,7 @@ public class Character : MonoBehaviour
     [Header("基础属性")]
     public float maxHealth;
     public float currentHealth;
+    public float runOffHealth;
 
     [Header("受伤无敌")]
     public float invulnerableDuration;
@@ -24,6 +25,7 @@ public class Character : MonoBehaviour
     private void OnEnable()
     {
         NewGameEvent.OnEventRiased += NewGame;
+        currentHealth = maxHealth;
     }
 
     
@@ -66,5 +68,10 @@ public class Character : MonoBehaviour
             invulnerable = true;
             invulnerableCounter = invulnerableDuration;
         }
+    }
+    public void FieldOpen(bool isField)
+    {
+        if (isField)
+            currentHealth -= runOffHealth;
     }
 }

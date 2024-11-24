@@ -5,15 +5,19 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Events;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerInputControl inputControl;
     public Rigidbody2D rb;
+    public GameObject FieldMask;
     public Vector2 inputDirection;
     private PhysicsCheck physicsCheck;
     private PlayerAnimation playerAnimation;
     private CapsuleCollider2D coll;
+    private Character character;
     [Header("事件监听")]
     public SceneLoadEventSO loadEvent;
     public VoidEventSO afterSceneLoadedEvent;
@@ -27,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public bool isHurt;
     public bool isDead;
     public bool isAttack;
+    public bool isField;
 
     private void Awake()
     {
@@ -34,11 +39,12 @@ public class PlayerController : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
         playerAnimation = GetComponent<PlayerAnimation>();
         coll = GetComponent<CapsuleCollider2D>();
+        character = GetComponent<Character>();
         inputControl = new PlayerInputControl();
         inputControl.Gameplay.Jump.started += Jump;
         inputControl.Gameplay.Attack.started += PlayerAttack;
+        inputControl.Gameplay.Field.started += Field;
     }
-
 
 
     private void OnEnable()
@@ -65,20 +71,23 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if(!isHurt && !isDead) 
+            Move();
+        character.FieldOpen(isField);
     }
 
     public void Move()//移动
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
         int faceDir = (int)transform.localScale.x;
+        
         if (inputDirection.x < 0)
             faceDir = -1;
         if (inputDirection.x > 0)
             faceDir = 1;
         transform.localScale = new Vector3(faceDir, 1, 1);
+        
     }
-
     private void Jump(InputAction.CallbackContext context)
     {
         if (physicsCheck.isGround || (!physicsCheck.isGround && currentJumpTimes != jumpTimes))
@@ -87,12 +96,17 @@ public class PlayerController : MonoBehaviour
             currentJumpTimes++;
         }
     }//跳跃
-
     private void PlayerAttack(InputAction.CallbackContext context)
     {
         //playerAnimation.PlayAttack();
         isAttack = true;
     }    //攻击
+
+    private void Field(InputAction.CallbackContext context)
+    {
+        isField = !isField;
+        FieldMask.SetActive(isField);
+    }//领域展开
 
     //场景加载禁止移动
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
