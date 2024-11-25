@@ -12,6 +12,9 @@ public class Character : MonoBehaviour
     [Header("基础属性")]
     public float maxHealth;
     public float currentHealth;
+    public float maxMP;
+    public float currentMP;
+    public float shield;
     public float runOffHealth;
 
     [Header("受伤无敌")]
@@ -28,7 +31,6 @@ public class Character : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    
     private void OnDisable()
     {
         NewGameEvent.OnEventRiased -= NewGame;
@@ -37,6 +39,7 @@ public class Character : MonoBehaviour
     private void NewGame()
     {
         currentHealth = maxHealth;
+        currentMP = maxMP;
         OnHealthChange?.Invoke(this);
     }
     private void Update()
@@ -54,9 +57,18 @@ public class Character : MonoBehaviour
     {
         if (invulnerable)
             return;
-        if(currentHealth - attacker.damage > 0)
+        if(currentHealth + shield - attacker.damage > 0)
         {
-            currentHealth -= attacker.damage;
+            if(shield - attacker.damage >= 0)
+            {
+                shield -= attacker.damage;
+            }
+            else
+            { 
+                currentHealth -= (attacker.damage - shield);
+                shield = 0;
+            }
+            
             TriggerInvulnerable();
             OnTakeDamage?.Invoke(attacker.transform);
         }

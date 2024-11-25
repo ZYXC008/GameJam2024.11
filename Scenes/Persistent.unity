@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 425296315}
   - component: {fileID: 425296314}
   - component: {fileID: 425296310}
+  - component: {fileID: 425296316}
   - component: {fileID: 425296313}
   m_Layer: 3
   m_Name: Player
@@ -440,6 +441,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f4059e89-3bca-4121-8f7b-965bc21d1407
     m_ActionName: Gameplay/Sprint[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fec53035-a180-435f-afbf-4c2d03656ba6
+    m_ActionName: Gameplay/SwitchWeaponUp[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1ce36078-f571-4f06-8e7a-1ec23569a1cc
+    m_ActionName: Gameplay/SwitchWeaponDown[/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -518,6 +527,9 @@ MonoBehaviour:
   NewGameEvent: {fileID: 11400000, guid: 4b551df86f235734a97516f065dc7ed1, type: 2}
   maxHealth: 100
   currentHealth: 0
+  maxMP: 0
+  currentMP: 0
+  shield: 0
   runOffHealth: 0.01
   invulnerableDuration: 1
   invulnerable: 0
@@ -539,7 +551,19 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 425296315}
+        m_TargetAssemblyTypeName: PlayerAnimation, Assembly-CSharp
+        m_MethodName: PlayHurt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 425296314}
         m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
         m_MethodName: GetHurt
         m_Mode: 0
@@ -566,7 +590,7 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 425296314}
         m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
         m_MethodName: PlayerDead
         m_Mode: 1
@@ -620,6 +644,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa2b897166d3dd43923397b84988b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &425296316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425296304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b41d4eb8463a54185f000e97ae577c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefebs: []
+  weaponCount: 0
+  weaponSkill: {fileID: 0}
 --- !u!1 &691420571
 GameObject:
   m_ObjectHideFlags: 0

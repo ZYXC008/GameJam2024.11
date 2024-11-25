@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isHurt && !isDead)
+        if(!isHurt && !isDead /*&& !isAttack*/)
         {
             Move();
             Sprint();
@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour
     {
         isSprint = true;
     }//≥Â¥Ã
-
     //≥°æ∞º”‘ÿΩ˚÷π“∆∂Ø
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
     {
@@ -150,7 +149,6 @@ public class PlayerController : MonoBehaviour
     {
         inputControl.Gameplay.Enable();
     }
-
     public void GetHurt(Transform attcker)
     {
         isHurt = true;

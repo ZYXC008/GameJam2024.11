@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     private Rigidbody2D rb;
     private PhysicsCheck physicsCheck;
     private PlayerController playerController;
+    private PlayerWeaponController playerWeaponController;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class PlayerAnimation : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         playerController = GetComponent<PlayerController>();
+        playerWeaponController = GetComponent<PlayerWeaponController>();
     }
 
     private void Update()
@@ -28,6 +30,7 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool("isGround", physicsCheck.isGround);
         anim.SetBool("isDead", playerController.isDead);
         anim.SetBool("isAttack", playerController.isAttack);
+        anim.SetInteger("weaponTag", playerWeaponController.weaponSkill.weaponTag);
     }
     public void PlayHurt()
     {
