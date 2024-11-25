@@ -7,12 +7,13 @@ using UnityEngine.InputSystem;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.Events;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerInputControl inputControl;
     public Rigidbody2D rb;
-    public GameObject FieldMask;
+    public FieldController fieldMask;
     public Vector2 inputDirection;
     private PhysicsCheck physicsCheck;
     private PlayerAnimation playerAnimation;
@@ -27,11 +28,17 @@ public class PlayerController : MonoBehaviour
     public float hurtForce;
     public int jumpTimes;
     public int currentJumpTimes;
+    public float sprintForce;
+    [Header("¼ÆÊ±Æ÷")]
+    public float sprintTime;
+    public float sprintTimeCounter;
+    
     [Header("×´Ì¬")]
     public bool isHurt;
     public bool isDead;
     public bool isAttack;
     public bool isField;
+    public bool isSprint;
 
     private void Awake()
     {
@@ -44,8 +51,10 @@ public class PlayerController : MonoBehaviour
         inputControl.Gameplay.Jump.started += Jump;
         inputControl.Gameplay.Attack.started += PlayerAttack;
         inputControl.Gameplay.Field.started += Field;
+        inputControl.Gameplay.Sprint.started += IsSprint;
     }
 
+    
 
     private void OnEnable()
     {
@@ -54,7 +63,6 @@ public class PlayerController : MonoBehaviour
         //loadEvent.LoadRequestEvent += OnLoadEvent;
         //afterSceneLoadedEvent.OnEventRiased += OnAfterSceneLoadedEvent;
     }
-
 
     private void OnDisable()
     {
@@ -71,8 +79,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isHurt && !isDead) 
+        if(!isHurt && !isDead)
+        {
             Move();
+            Sprint();
+        }
+            
         character.FieldOpen(isField);
     }
 
@@ -88,6 +100,23 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(faceDir, 1, 1);
         
     }
+    public void Sprint()
+    {
+        if (isSprint)
+        {
+            if(sprintTimeCounter <= sprintTime)
+            {
+                rb.AddForce(inputDirection * sprintForce, ForceMode2D.Impulse);
+                sprintTimeCounter += Time.fixedDeltaTime;
+            }
+            else
+            {
+            isSprint = false;
+            sprintTimeCounter = 0;
+            }
+        }
+        
+    }
     private void Jump(InputAction.CallbackContext context)
     {
         if (physicsCheck.isGround || (!physicsCheck.isGround && currentJumpTimes != jumpTimes))
@@ -101,12 +130,15 @@ public class PlayerController : MonoBehaviour
         //playerAnimation.PlayAttack();
         isAttack = true;
     }    //¹¥»÷
-
     private void Field(InputAction.CallbackContext context)
     {
         isField = !isField;
-        FieldMask.SetActive(isField);
+        fieldMask.SetField(isField);
     }//ÁìÓòÕ¹¿ª
+    private void IsSprint(InputAction.CallbackContext context)
+    {
+        isSprint = true;
+    }//³å´Ì
 
     //³¡¾°¼ÓÔØ½ûÖ¹ÒÆ¶¯
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)
@@ -131,7 +163,6 @@ public class PlayerController : MonoBehaviour
         isDead = true;
         inputControl.Gameplay.Disable();
     }
-
     public void CheckState()
     {
         if (physicsCheck.isGround && currentJumpTimes != 0)
@@ -139,4 +170,6 @@ public class PlayerController : MonoBehaviour
             currentJumpTimes = 0;
         }
     }
+    
+   
 }

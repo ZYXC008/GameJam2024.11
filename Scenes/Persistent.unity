@@ -265,7 +265,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.7853982
+  m_Mass: 0.8513109
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -341,7 +341,7 @@ Transform:
   m_GameObject: {fileID: 425296304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.92, y: 0.08, z: 0}
+  m_LocalPosition: {x: -1.61, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 425296305}
-  FieldMask: {fileID: 1077070954}
+  fieldMask: {fileID: 1077070958}
   inputDirection: {x: 0, y: 0}
   loadEvent: {fileID: 11400000, guid: abcf93e6b3fc941458dcc938186ad335, type: 2}
   afterSceneLoadedEvent: {fileID: 11400000, guid: ee0bf418a1713174bbad47d8393a58d2, type: 2}
@@ -600,10 +600,14 @@ MonoBehaviour:
   hurtForce: 0
   jumpTimes: 1
   currentJumpTimes: 0
+  sprintForce: 4
+  sprintTime: 1.5
+  sprintTimeCounter: 0
   isHurt: 0
   isDead: 0
   isAttack: 0
   isField: 0
+  isSprint: 0
 --- !u!114 &425296315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,7 +815,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 425296308}
   m_Follow: {fileID: 425296308}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 78
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -838,7 +842,7 @@ Transform:
   m_GameObject: {fileID: 747137076}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.92, y: 0.08, z: -10}
+  m_LocalPosition: {x: -1.61, y: -0.24, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -870,6 +874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1077070955}
   - component: {fileID: 1077070956}
+  - component: {fileID: 1077070958}
   - component: {fileID: 1077070957}
   m_Layer: 3
   m_Name: Field
@@ -877,7 +882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1077070955
 Transform:
   m_ObjectHideFlags: 0
@@ -887,8 +892,8 @@ Transform:
   m_GameObject: {fileID: 1077070954}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.92, y: 0.08, z: 1.55}
-  m_LocalScale: {x: 2.85, y: 2.85, z: 2.85}
+  m_LocalPosition: {x: -1.837, y: 0.08, z: 1.55}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -934,7 +939,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -945,7 +950,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1077070957
+--- !u!95 &1077070957
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077070954}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 42a4c46f8a4f8b3468189b3c35be95fe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1077070958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -958,6 +984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosition: {fileID: 425296308}
+  isField: 0
 --- !u!1 &1175625433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1462,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 32.96973
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -1450,10 +1477,10 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 78
   orthographic: 0
   orthographic size: 10
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1477,9 +1504,9 @@ Transform:
   m_GameObject: {fileID: 2061083104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.92, y: 0.08, z: -10}
+  m_LocalPosition: {x: -1.61, y: -0.24, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

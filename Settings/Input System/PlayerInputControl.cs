@@ -73,7 +73,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interaction"",
+                    ""name"": ""Confirm"",
                     ""type"": ""Button"",
                     ""id"": ""731993db-9f37-457c-b95a-652087d5fd46"",
                     ""expectedControlType"": ""Button"",
@@ -113,28 +113,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""8180e8bd-4097-4f4e-ab88-4523101a6ce9"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1c5327b5-f71c-4f60-99c7-4e737386f1d1"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -253,7 +231,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Interaction"",
+                    ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -857,7 +835,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Field = m_Gameplay.FindAction("Field", throwIfNotFound: true);
-        m_Gameplay_Interaction = m_Gameplay.FindAction("Interaction", throwIfNotFound: true);
+        m_Gameplay_Confirm = m_Gameplay.FindAction("Confirm", throwIfNotFound: true);
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -937,7 +915,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Field;
-    private readonly InputAction m_Gameplay_Interaction;
+    private readonly InputAction m_Gameplay_Confirm;
     private readonly InputAction m_Gameplay_Sprint;
     public struct GameplayActions
     {
@@ -948,7 +926,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Field => m_Wrapper.m_Gameplay_Field;
-        public InputAction @Interaction => m_Wrapper.m_Gameplay_Interaction;
+        public InputAction @Confirm => m_Wrapper.m_Gameplay_Confirm;
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -974,9 +952,9 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @Field.started += instance.OnField;
             @Field.performed += instance.OnField;
             @Field.canceled += instance.OnField;
-            @Interaction.started += instance.OnInteraction;
-            @Interaction.performed += instance.OnInteraction;
-            @Interaction.canceled += instance.OnInteraction;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -999,9 +977,9 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @Field.started -= instance.OnField;
             @Field.performed -= instance.OnField;
             @Field.canceled -= instance.OnField;
-            @Interaction.started -= instance.OnInteraction;
-            @Interaction.performed -= instance.OnInteraction;
-            @Interaction.canceled -= instance.OnInteraction;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -1192,7 +1170,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnField(InputAction.CallbackContext context);
-        void OnInteraction(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
     }
     public interface IUIActions
