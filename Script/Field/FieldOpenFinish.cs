@@ -12,7 +12,7 @@ public class FieldOpenFinish : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (stateInfo.normalizedTime >= 1.0f)
+        if (stateInfo.normalizedTime >= 1.0f )
         {
             // 动画 A 已播放完，可以转换为下一个动画
             animator.SetTrigger("playFinish"); // 设置触发器转到下一个动画

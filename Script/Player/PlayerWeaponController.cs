@@ -17,17 +17,20 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void Awake()
     {
-        weaponSkill = weaponPrefebs[weaponCount].GetComponent<Weapon>();
+        weaponSkill = weaponPrefebs[weaponCount]?.GetComponent<Weapon>();
         inputControl = new PlayerInputControl();
         inputControl.Gameplay.SwitchWeaponUp.started += SwitchWeaponUp;
         inputControl.Gameplay.SwitchWeaponDown.started += SwitchWeaponDown;
     }
-
+    private void OnEnable()
+    {
+        inputControl.Enable();
+    }
     private void SwitchWeaponUp(InputAction.CallbackContext context)
     {
         if (weaponCount == 0)
         {
-            weaponCount = weaponPrefebs.Count;
+            weaponCount = weaponPrefebs.Count - 1;
         }
         else
         {

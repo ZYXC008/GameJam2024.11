@@ -8,6 +8,7 @@ public class FieldController : MonoBehaviour
 {
     public Transform playerPosition;
     private Animator anim;
+    public Vector2 fixPosition;
     public bool isField;
 
     private void Awake()
@@ -16,7 +17,7 @@ public class FieldController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        transform.position = new Vector3(playerPosition.position.x, playerPosition.position.y, transform.position.z);
+        transform.position = new Vector3(playerPosition.position.x + (fixPosition.x*playerPosition.localScale.x), playerPosition.position.y + fixPosition.y, transform.position.z);
     }
 
     public void SetField(bool isField)

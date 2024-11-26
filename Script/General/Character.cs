@@ -72,6 +72,13 @@ public class Character : MonoBehaviour
             TriggerInvulnerable();
             OnTakeDamage?.Invoke(attacker.transform);
         }
+        else
+        {
+            currentHealth = 0;
+            //¥•∑¢À¿Õˆ
+            OnDead?.Invoke();
+        }
+        OnHealthChange?.Invoke(this);
     }
     private void TriggerInvulnerable()
     {
@@ -84,6 +91,10 @@ public class Character : MonoBehaviour
     public void FieldOpen(bool isField)
     {
         if (isField)
+        {
             currentHealth -= runOffHealth;
+            OnHealthChange?.Invoke(this);
+        }
+           
     }
 }
