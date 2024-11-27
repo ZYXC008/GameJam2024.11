@@ -26,6 +26,10 @@ public class PlayerWeaponController : MonoBehaviour
     {
         inputControl.Enable();
     }
+    private void OnDisable()
+    {
+        inputControl.Disable();
+    }
     private void SwitchWeaponUp(InputAction.CallbackContext context)
     {
         if (weaponCount == 0)

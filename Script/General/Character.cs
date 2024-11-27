@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, ISaveable
 {
     [Header("ÊÂ¼þ¼àÌý")]
     public VoidEventSO NewGameEvent;
@@ -28,12 +28,16 @@ public class Character : MonoBehaviour
     private void OnEnable()
     {
         NewGameEvent.OnEventRiased += NewGame;
+        ISaveable saveable = this;
+        saveable.RegisterSaveData();
         currentHealth = maxHealth;
     }
 
     private void OnDisable()
     {
         NewGameEvent.OnEventRiased -= NewGame;
+        ISaveable saveable = this;
+        saveable.UnRegisterSaveData();
     }
     
     private void NewGame()
@@ -96,5 +100,39 @@ public class Character : MonoBehaviour
             OnHealthChange?.Invoke(this);
         }
            
+    }
+
+    public DataDefination GetDataID()
+    {
+        return GetComponent<DataDefination>();
+    }
+
+    public void GetSaveData(Data data)
+    {
+        if (data.characterPosDict.ContainsKey(GetDataID().ID))
+        {
+            data.characterPosDict[GetDataID().ID] = transform.position;
+            data.floatSavedData[GetDataID().ID + "health"] = currentHealth;
+            data.floatSavedData[GetDataID().ID + "MP"] = currentMP;
+            data.floatSavedData[GetDataID().ID + "shield"] = shield;
+        }
+        else
+        {
+            data.characterPosDict.Add(GetDataID().ID, transform.position);
+            data.floatSavedData.Add(GetDataID().ID + "health",this.currentHealth);
+            data.floatSavedData.Add(GetDataID().ID + "shield", this.shield);
+            data.floatSavedData.Add(GetDataID().ID + "MP", this.currentMP);
+        }
+    }
+
+    public void LoadData(Data data)
+    {
+        if (data.characterPosDict.ContainsKey(GetDataID().ID))
+        {
+            this.transform.position = data.characterPosDict[GetDataID().ID];
+            this.currentHealth = data.floatSavedData[GetDataID().ID + "health"];
+            this.currentMP = data.floatSavedData[GetDataID().ID + "MP"];
+            this.shield = data.floatSavedData[GetDataID().ID = "shield"];
+        }
     }
 }
