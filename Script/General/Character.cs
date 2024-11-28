@@ -132,7 +132,7 @@ public class Character : MonoBehaviour, ISaveable
             this.transform.position = data.characterPosDict[GetDataID().ID];
             this.currentHealth = data.floatSavedData[GetDataID().ID + "health"];
             this.currentMP = data.floatSavedData[GetDataID().ID + "MP"];
-            this.shield = data.floatSavedData[GetDataID().ID = "shield"];
+            this.shield = data.floatSavedData[GetDataID().ID + "shield"];
         }
     }
 }
