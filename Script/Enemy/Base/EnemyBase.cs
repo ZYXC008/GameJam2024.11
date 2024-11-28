@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.AssetImporters;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
-
 public class EnemyBase : MonoBehaviour
 {
     // Rigidbody2D组件，用于处理物理相关的操作
     public Rigidbody2D rb;
     protected Character character;
-
+    private Attack attack;
+    private GameObject self;
     // 动画控制器
     [HideInInspector] public Animator anim;
 
@@ -51,6 +52,7 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void Awake()
     {
+
         // 获取必要的组件
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -61,6 +63,8 @@ public class EnemyBase : MonoBehaviour
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;
         physicsCheck.isGround = true; // 默认认为在地面上
+
+
     }
 
 

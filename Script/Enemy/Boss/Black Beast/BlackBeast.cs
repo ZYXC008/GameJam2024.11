@@ -43,12 +43,13 @@ public class BlackBeast : EnemyBase
         if (!isDead)
         {
             currentState?.PhysicsUpdate();
+            if (currentState == patrolState)
+            {
+                Move();
+            }
         }
 
-        if (currentState == patrolState)
-        {
-            Move();
-        }
+
 
     }
 

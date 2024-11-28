@@ -10,7 +10,7 @@ public class PiercerChaseState : BaseState
     {
         currentEnemy = enemy;
         isChasing = true;
-        //currentEnemy.anim.SetTrigger("Attack");
+        currentEnemy.anim.SetTrigger("Attack");
     }
 
     public override void LogicUpdate()
@@ -36,7 +36,6 @@ public class PiercerChaseState : BaseState
                 isChasing = false;
                 piercer.StartCoroutine(StandAfterChase());
             }
-
         }
     }
 
