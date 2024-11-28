@@ -30,7 +30,7 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool("isGround", physicsCheck.isGround);
         anim.SetBool("isDead", playerController.isDead);
         anim.SetBool("isAttack", playerController.isAttack);
-        anim.SetInteger("weaponTag", (int)playerWeaponController.weaponAttack.weaponTag);
+        anim.SetInteger("weaponTag", playerWeaponController.weaponSkill.weaponTag);
     }
     public void PlayHurt()
     {

@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class ItemAddHealth : MonoBehaviour, IInteractable
 {
     public int addHealth;
+    public GameObject itemAddHealth;
     public void TriggerAction(Character character)
     {
          TakeItem(character);
@@ -16,6 +17,6 @@ public class ItemAddHealth : MonoBehaviour, IInteractable
         character.maxHealth += addHealth;
         character.currentHealth += addHealth;
         character.OnHealthChange?.Invoke(character);
-        gameObject.SetActive(false);
+        itemAddHealth.SetActive(false);
     }
 }

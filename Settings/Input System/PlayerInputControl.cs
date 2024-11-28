@@ -107,33 +107,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchSkillUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""99fe1a67-945c-4a0b-bcf4-70230949fadf"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchSkillDown"",
-                    ""type"": ""Button"",
-                    ""id"": ""3fa6e76e-1ce7-40d8-95f9-6575d66ffc83"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""UseSkill"",
-                    ""type"": ""Button"",
-                    ""id"": ""1b065028-d05e-4ef3-8de5-15def7e057ac"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -310,39 +283,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""SwitchWeaponDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fe1080ec-d366-4f19-a65e-d4482a03e99b"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SwitchSkillUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""83a850dc-6588-4526-a744-0deb14136e92"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SwitchSkillDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""af0f7b9a-483a-4cd0-9bf0-42259045b48b"",
-                    ""path"": ""<Keyboard>/v"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""UseSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -939,9 +879,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
         m_Gameplay_SwitchWeaponUp = m_Gameplay.FindAction("SwitchWeaponUp", throwIfNotFound: true);
         m_Gameplay_SwitchWeaponDown = m_Gameplay.FindAction("SwitchWeaponDown", throwIfNotFound: true);
-        m_Gameplay_SwitchSkillUp = m_Gameplay.FindAction("SwitchSkillUp", throwIfNotFound: true);
-        m_Gameplay_SwitchSkillDown = m_Gameplay.FindAction("SwitchSkillDown", throwIfNotFound: true);
-        m_Gameplay_UseSkill = m_Gameplay.FindAction("UseSkill", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1024,9 +961,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Sprint;
     private readonly InputAction m_Gameplay_SwitchWeaponUp;
     private readonly InputAction m_Gameplay_SwitchWeaponDown;
-    private readonly InputAction m_Gameplay_SwitchSkillUp;
-    private readonly InputAction m_Gameplay_SwitchSkillDown;
-    private readonly InputAction m_Gameplay_UseSkill;
     public struct GameplayActions
     {
         private @PlayerInputControl m_Wrapper;
@@ -1040,9 +974,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
         public InputAction @SwitchWeaponUp => m_Wrapper.m_Gameplay_SwitchWeaponUp;
         public InputAction @SwitchWeaponDown => m_Wrapper.m_Gameplay_SwitchWeaponDown;
-        public InputAction @SwitchSkillUp => m_Wrapper.m_Gameplay_SwitchSkillUp;
-        public InputAction @SwitchSkillDown => m_Wrapper.m_Gameplay_SwitchSkillDown;
-        public InputAction @UseSkill => m_Wrapper.m_Gameplay_UseSkill;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1079,15 +1010,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @SwitchWeaponDown.started += instance.OnSwitchWeaponDown;
             @SwitchWeaponDown.performed += instance.OnSwitchWeaponDown;
             @SwitchWeaponDown.canceled += instance.OnSwitchWeaponDown;
-            @SwitchSkillUp.started += instance.OnSwitchSkillUp;
-            @SwitchSkillUp.performed += instance.OnSwitchSkillUp;
-            @SwitchSkillUp.canceled += instance.OnSwitchSkillUp;
-            @SwitchSkillDown.started += instance.OnSwitchSkillDown;
-            @SwitchSkillDown.performed += instance.OnSwitchSkillDown;
-            @SwitchSkillDown.canceled += instance.OnSwitchSkillDown;
-            @UseSkill.started += instance.OnUseSkill;
-            @UseSkill.performed += instance.OnUseSkill;
-            @UseSkill.canceled += instance.OnUseSkill;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1119,15 +1041,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
             @SwitchWeaponDown.started -= instance.OnSwitchWeaponDown;
             @SwitchWeaponDown.performed -= instance.OnSwitchWeaponDown;
             @SwitchWeaponDown.canceled -= instance.OnSwitchWeaponDown;
-            @SwitchSkillUp.started -= instance.OnSwitchSkillUp;
-            @SwitchSkillUp.performed -= instance.OnSwitchSkillUp;
-            @SwitchSkillUp.canceled -= instance.OnSwitchSkillUp;
-            @SwitchSkillDown.started -= instance.OnSwitchSkillDown;
-            @SwitchSkillDown.performed -= instance.OnSwitchSkillDown;
-            @SwitchSkillDown.canceled -= instance.OnSwitchSkillDown;
-            @UseSkill.started -= instance.OnUseSkill;
-            @UseSkill.performed -= instance.OnUseSkill;
-            @UseSkill.canceled -= instance.OnUseSkill;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1319,9 +1232,6 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnSwitchWeaponUp(InputAction.CallbackContext context);
         void OnSwitchWeaponDown(InputAction.CallbackContext context);
-        void OnSwitchSkillUp(InputAction.CallbackContext context);
-        void OnSwitchSkillDown(InputAction.CallbackContext context);
-        void OnUseSkill(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

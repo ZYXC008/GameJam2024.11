@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimation playerAnimation;
     private CapsuleCollider2D coll;
     private Character character;
-    private PlayerWeaponController weaponController;
     [Header("ÊÂ¼þ¼àÌý")]
     public SceneLoadEventSO loadEvent;
     public VoidEventSO afterSceneLoadedEvent;
@@ -40,7 +39,6 @@ public class PlayerController : MonoBehaviour
     public bool isAttack;
     public bool isField;
     public bool isSprint;
-    public bool isUseSkill;
 
     private void Awake()
     {
@@ -49,14 +47,14 @@ public class PlayerController : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
         coll = GetComponent<CapsuleCollider2D>();
         character = GetComponent<Character>();
-        
         inputControl = new PlayerInputControl();
         inputControl.Gameplay.Jump.started += Jump;
         inputControl.Gameplay.Attack.started += PlayerAttack;
         inputControl.Gameplay.Field.started += Field;
         inputControl.Gameplay.Sprint.started += IsSprint;
-        inputControl.Gameplay.UseSkill.started += UseSkill;
     }
+
+    
 
     private void OnEnable()
     {
@@ -131,20 +129,7 @@ public class PlayerController : MonoBehaviour
     {
         //playerAnimation.PlayAttack();
         isAttack = true;
-        weaponController = GetComponent<PlayerWeaponController>();
-        if (weaponController.buffTimes > 0)
-        {
-            weaponController.buffTimes--;
-        }
-        
     }    //¹¥»÷
-
-    private void UseSkill(InputAction.CallbackContext context)
-    {
-        weaponController = GetComponent<PlayerWeaponController>();
-        isUseSkill = true;
-        weaponController.skillAttack.Skill();
-    }
     private void Field(InputAction.CallbackContext context)
     {
         isField = !isField;
