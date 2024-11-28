@@ -5,8 +5,9 @@ using UnityEngine.InputSystem.iOS;
 
 public class BlackBeastSideAttackState : BaseState
 {
+    private int speedCount = 0;
     private bool hasAttacked;
-    public float attackTimer = 1f;
+    public float attackTimer = 0.5f;
     private float attackTime;
     private int attackCount = 0; // 记录攻击方向和攻击次数
     public override void OnEnter(EnemyBase enemy)
@@ -23,8 +24,27 @@ public class BlackBeastSideAttackState : BaseState
 
     public override void LogicUpdate()
     {
+        if (currentEnemy.character.stop && !currentEnemy.isDead)
+        {
+            currentEnemy.StopMovement();
+            currentEnemy.anim.speed = 0f;  // 设置 speed 为 0，暂停动画
+            currentEnemy.GetComponent<Attack>().enabled = false; // 关闭伤害触发脚本
+        }
+
+        if (!currentEnemy.character.stop && currentEnemy.isDead)
+        {
+            if (speedCount == 0)
+            {
+                currentEnemy.currentSpeed = 0;
+                speedCount++;
+            }
+
+            currentEnemy.anim.speed = 1;
+            currentEnemy.GetComponent<Attack>().enabled = true; // stop标志关闭时开启伤害触发脚本
+        }
+
         attackTimer += Time.deltaTime;
-        if (!hasAttacked && attackCount < 2 && attackTime >= attackTimer) //只能攻击两次 且攻击两边
+        if (!hasAttacked && attackCount < 2 && attackTime >= attackTimer && !currentEnemy.isDead && !currentEnemy.character.stop) //只能攻击两次 且攻击两边
         {
             attackTime = 0;
             // 停止角色移动
@@ -40,20 +60,25 @@ public class BlackBeastSideAttackState : BaseState
             attackCount++;
         }
 
-        if (hasAttacked == false)
-        {
-            hasAttacked = true;
-        }
-
         if (attackTimer >= attackTime)
         {
             attackTimer = 0;
             hasAttacked = false;
         }
+
+        if (hasAttacked == false)
+        {
+            hasAttacked = true;
+        }
+
+
     }
 
 
-    public override void PhysicsUpdate() { }
+    public override void PhysicsUpdate()
+    {
+
+    }
 
     public override void OnExit()
     {
@@ -65,12 +90,19 @@ public class BlackBeastSideAttackState : BaseState
 
     IEnumerator StopAndChange()
     {
-
-        currentEnemy.StopMovement();
+        if (!currentEnemy.isDead)
+        {
+            // 停止移动
+            currentEnemy.StopMovement();
+        }
         // 等待1秒
         yield return new WaitForSeconds(1f);
 
-        // 切换到巡逻状态
-        currentEnemy.SwichState(NPCState.Patrol);
+        if (!currentEnemy.isDead)
+        {
+            currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
+            // 切换到巡逻状态
+            currentEnemy.SwichState(NPCState.Patrol);
+        }
     }
 }

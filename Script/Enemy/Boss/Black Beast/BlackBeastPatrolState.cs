@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BlackBeastPatrolState : BaseState
 {
+    private int speedCount = 0;
     public override void OnEnter(EnemyBase enemy)
     {
         currentEnemy = enemy;
@@ -12,7 +13,24 @@ public class BlackBeastPatrolState : BaseState
 
     public override void LogicUpdate()
     {
+        if (currentEnemy.character.stop && !currentEnemy.isDead)
+        {
+            currentEnemy.StopMovement();
+            currentEnemy.anim.speed = 0f;  // 设置 speed 为 0，暂停动画
+            currentEnemy.GetComponent<Attack>().enabled = false; // 关闭伤害触发脚本
+        }
 
+        if (!currentEnemy.character.stop && currentEnemy.isDead)
+        {
+            if (speedCount == 0)
+            {
+                currentEnemy.currentSpeed = currentEnemy.normalSpeed;
+                speedCount++;
+            }
+
+            currentEnemy.anim.speed = 1;
+            currentEnemy.GetComponent<Attack>().enabled = true; // stop标志关闭时开启伤害触发脚本
+        }
     }
 
     public override void PhysicsUpdate()

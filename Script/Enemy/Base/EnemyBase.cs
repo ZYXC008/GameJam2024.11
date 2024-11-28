@@ -8,9 +8,8 @@ public class EnemyBase : MonoBehaviour
 {
     // Rigidbody2D组件，用于处理物理相关的操作
     public Rigidbody2D rb;
-    protected Character character;
-    private Attack attack;
-    private GameObject self;
+    [HideInInspector] public Character character;
+
     // 动画控制器
     [HideInInspector] public Animator anim;
 
@@ -231,7 +230,11 @@ public class EnemyBase : MonoBehaviour
     }
     public virtual void StopMovement()
     {
-        rb.velocity = Vector2.zero; // 停止移动
+        rb.velocity = Vector2.zero; // 让怪物静止
+    }
+    public virtual void StopMovementX()
+    {
+        rb.velocity = new Vector2(0, rb.velocity.y); // 停止当前水平速度
     }
     public void Flip()
     {

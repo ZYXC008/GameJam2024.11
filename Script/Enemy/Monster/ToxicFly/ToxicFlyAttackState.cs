@@ -3,37 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-//public class ToxicFlyAttackState : BaseState
-//{
-//    public float attackTime;
-//    private int attackCount = 1;
-//    private float attackTimer = 1f; // 每颗飞沫的攻击间隔时间
-//    public override void OnEnter(EnemyBase enemy)
-//    {
-//        currentEnemy = enemy;
-
-//        currentEnemy.anim.SetBool("IsWalking", false);
-//        currentEnemy.anim.SetTrigger("Attack"); //进入攻击状态则先攻击一次
-//        // 获得攻击时的伤害
-//        currentEnemy.GetComponent<Attack>().damage = 2;
-//    }
-
-//    public override void LogicUpdate()
-//    {
-
-//    }
-
-//    public override void PhysicsUpdate()
-//    {
-
-//    }
-
-//    public override void OnExit()
-//    {
-//        currentEnemy.anim.SetBool("IsWalking", true);
-//        currentEnemy.SwichState(NPCState.Patrol);
-//    }
-//}
 
 public class ToxicFlyAttackState : BaseState
 {

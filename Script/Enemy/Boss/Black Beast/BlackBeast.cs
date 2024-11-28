@@ -33,7 +33,11 @@ public class BlackBeast : EnemyBase
 
         if (!isDead)
         {
-            ChangeState();
+            // 看到玩家则切换攻击状态
+            if (FoundPlayer())
+            {
+                ChangeState();
+            }
             currentState?.LogicUpdate();
         }
     }
@@ -59,12 +63,6 @@ public class BlackBeast : EnemyBase
         {
             // 基础巡逻移动逻辑
             base.Move();
-
-            // 检测地面中断或墙壁，调整方向
-            if (!physicsCheck.isGround || physicsCheck.touchLeftWall || physicsCheck.touchRightWall)
-            {
-                Flip();
-            }
         }
 
         else if (FoundPlayer())

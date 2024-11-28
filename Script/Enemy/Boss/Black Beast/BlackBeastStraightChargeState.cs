@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlackBeastStraightChargeState : BaseState
 {
-
+    private int speedCount = 0;
     private PhysicsCheck physicsCheck;
 
 
@@ -22,8 +22,24 @@ public class BlackBeastStraightChargeState : BaseState
 
     public override void LogicUpdate()
     {
-        // 执行冲撞
-        currentEnemy.rb.velocity = new Vector2(currentEnemy.faceDir.x * currentEnemy.chaseSpeed, 0);
+        if (currentEnemy.character.stop && !currentEnemy.isDead)
+        {
+            currentEnemy.StopMovement();
+            currentEnemy.anim.speed = 0f;  // 设置 speed 为 0，暂停动画
+            currentEnemy.GetComponent<Attack>().enabled = false; // 关闭伤害触发脚本
+        }
+
+        if (!currentEnemy.character.stop && currentEnemy.isDead)
+        {
+            if (speedCount == 0)
+            {
+                currentEnemy.currentSpeed = currentEnemy.chaseSpeed;
+                speedCount++;
+            }
+
+            currentEnemy.anim.speed = 1;
+            currentEnemy.GetComponent<Attack>().enabled = true; // stop标志关闭时开启伤害触发脚本
+        }
     }
 
     public override void PhysicsUpdate()
@@ -42,12 +58,19 @@ public class BlackBeastStraightChargeState : BaseState
 
     IEnumerator StopAndChange()
     {
-
-        currentEnemy.StopMovement();
+        if (!currentEnemy.isDead)
+        {
+            // 停止移动
+            currentEnemy.StopMovement();
+        }
         // 等待1秒
         yield return new WaitForSeconds(1f);
 
-        // 切换到巡逻状态
-        currentEnemy.SwichState(NPCState.Patrol);
+        if (!currentEnemy.isDead)
+        {
+            currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
+            // 切换到巡逻状态
+            currentEnemy.SwichState(NPCState.Patrol);
+        }
     }
 }
