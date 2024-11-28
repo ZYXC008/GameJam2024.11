@@ -42,7 +42,7 @@ public class BlackBeastStraightChargeState : BaseState
 
     IEnumerator StopAndChange()
     {
-        currentEnemy.anim.SetBool("isWalking", true);
+
         currentEnemy.StopMovement();
         // 等待1秒
         yield return new WaitForSeconds(1f);

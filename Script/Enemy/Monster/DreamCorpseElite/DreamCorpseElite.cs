@@ -15,12 +15,10 @@ public class DreamCorpseElite : EnemyBase
         character.maxHealth = 30;
         character.currentHealth = character.maxHealth;
         this.GetComponent<Attack>().damage = 8;
+
+        // 初始化状态机
         patrolState = new DreamCorpseElitePatrolState();
         attackState = new DreamCorpseEliteAttackState();
-    }
-
-    private void Start()
-    {
         currentState = patrolState;
         currentState.OnEnter(this);
     }
@@ -55,17 +53,6 @@ public class DreamCorpseElite : EnemyBase
         return false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                player.GetHurt(transform);
-            }
-        }
-    }
 
     private void OnDrawGizmos()
     {

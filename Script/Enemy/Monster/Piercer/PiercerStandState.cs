@@ -7,6 +7,7 @@ public class PiercerStandState : BaseState
     public override void OnEnter(EnemyBase enemy)
     {
         currentEnemy = enemy;
+        currentEnemy.anim.SetBool("IsWalking", true);
         currentEnemy.currentSpeed = 0; // 停止移动
     }
 

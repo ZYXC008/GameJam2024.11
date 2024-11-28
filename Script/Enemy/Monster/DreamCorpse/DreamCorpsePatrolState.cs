@@ -9,6 +9,7 @@ public class DreamCorpsePatrolState : BaseState
     {
         // 初始化巡逻状态
         currentEnemy = enemy;
+        currentEnemy.anim.SetBool("IsWalking", true);
         currentEnemy.currentSpeed = currentEnemy.normalSpeed;
     }
 

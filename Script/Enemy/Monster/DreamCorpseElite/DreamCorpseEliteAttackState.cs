@@ -5,13 +5,14 @@ using UnityEngine;
 public class DreamCorpseEliteAttackState : BaseState
 {
     private bool hasAttacked;
-    private float attackTimer = 2f;
-    public float attackTime;
+    //private float attackTimer = 2f;
+    //public float attackTime;
     public override void OnEnter(EnemyBase enemy)
     {
         currentEnemy = enemy;
         hasAttacked = false;
-        attackTime = 0;
+        //attackTime = 0;
+
         // 初始化速度
         currentEnemy.currentSpeed = currentEnemy.normalSpeed;
         currentEnemy.anim.SetBool("isWalking", false);
@@ -19,12 +20,12 @@ public class DreamCorpseEliteAttackState : BaseState
 
     public override void LogicUpdate()
     {
-        attackTime += Time.deltaTime;
-        if (attackTime >= attackTimer)
-        {
-            attackTime = 0;
-            hasAttacked = false;
-        }
+        //attackTime += Time.deltaTime;
+        //if (attackTime >= attackTimer)
+        //{
+        //    attackTime = 0;
+        //    hasAttacked = false;
+        //}
     }
 
     public override void PhysicsUpdate()

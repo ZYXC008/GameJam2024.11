@@ -53,6 +53,7 @@ public class PiercerChaseState : BaseState
             // 追击结束，进入站立冷却
             piercer.rb.velocity = Vector2.zero;
             yield return new WaitForSeconds(piercer.standTimeAfterChase);
+            currentEnemy.SwichState(NPCState.Patrol);
             isChasing = false;
         }
     }

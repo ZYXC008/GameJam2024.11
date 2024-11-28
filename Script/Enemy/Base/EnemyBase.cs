@@ -184,8 +184,8 @@ public class EnemyBase : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
 
         isHurt = true; // 标记受伤
-        anim.SetTrigger("hurt"); // 播放受伤动画
-
+        anim.SetTrigger("Hurt"); // 播放受伤动画
+        anim.SetBool("IsWalking", false);
         // 计算受伤的反冲方向
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
 
@@ -200,6 +200,7 @@ public class EnemyBase : MonoBehaviour
 
         // 受伤状态持续时间
         yield return new WaitForSeconds(character.invulnerableDuration);
+        anim.SetBool("IsWalking", true);
         isHurt = false; // 恢复正常状态
     }
 
@@ -207,7 +208,7 @@ public class EnemyBase : MonoBehaviour
     {
         // 敌人死亡逻辑
         gameObject.layer = 2; // 将对象设置为忽略层
-        anim.SetBool("dead", true); // 播放死亡动画
+        anim.SetBool("Dead", true); // 播放死亡动画
         isDead = true; // 标记为死亡状态
         StartCoroutine(DestroyAfterAnimation()); // 启动销毁协程
     }
