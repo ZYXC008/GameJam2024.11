@@ -11,3 +11,8 @@ public enum PersistentType
 {
     ReadWrite,UnReadWrite
 }
+
+public enum WeaponType
+{
+    Normal,BigArea,StopEnemy
+}
