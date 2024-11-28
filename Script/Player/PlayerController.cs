@@ -56,11 +56,11 @@ public class PlayerController : MonoBehaviour
         inputControl.Gameplay.Field.started += Field;
         inputControl.Gameplay.Sprint.started += IsSprint;
         inputControl.Gameplay.UseSkill.started += UseSkill;
+        inputControl.Enable();
     }
 
     private void OnEnable()
-    {
-        inputControl.Enable();
+    { 
         //制作场景切换时解除注释
         //loadEvent.LoadRequestEvent += OnLoadEvent;
         //afterSceneLoadedEvent.OnEventRiased += OnAfterSceneLoadedEvent;
@@ -143,8 +143,8 @@ public class PlayerController : MonoBehaviour
     {
         weaponController = GetComponent<PlayerWeaponController>();
         isUseSkill = true;
-        weaponController.skillAttack.Skill();
-    }
+        weaponController.skillAttack.Skill(character);
+    }//使用技能
     private void Field(InputAction.CallbackContext context)
     {
         isField = !isField;

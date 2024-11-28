@@ -22,6 +22,11 @@ public class Character : MonoBehaviour, ISaveable
     private float invulnerableCounter;
     public bool invulnerable;
 
+    [Header("∂®…Ì")]
+    public float stopDuration;
+    public float stopCounter;
+    public bool stop;
+
     public UnityEvent<Character> OnHealthChange;
     public UnityEvent<Transform> OnTakeDamage;
     public UnityEvent OnDead;
@@ -54,6 +59,14 @@ public class Character : MonoBehaviour, ISaveable
             if(invulnerableCounter <= 0)
             {
                 invulnerable = false;
+            }
+        }
+        if(stop)
+        {
+            stopCounter -= Time.deltaTime;
+            if (stopCounter <= 0)
+            {
+                stop = false;
             }
         }
     }

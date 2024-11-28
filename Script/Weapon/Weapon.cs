@@ -24,11 +24,13 @@ public class Weapon : MonoBehaviour, IInteractable
         TakeItem(character);
     }
 
-    public void Skill()
+    public void Skill(Character character)
     {
         if(weaponTag == WeaponType.StopEnemy)
         {
-           //定住敌人
+            //定住敌人
+            character.stop = true;
+            character.stopCounter = character.stopDuration;
         }
     }
 }

@@ -549,6 +549,9 @@ MonoBehaviour:
   runOffHealth: 0.01
   invulnerableDuration: 1
   invulnerable: 0
+  stopDuration: 0
+  stopCounter: 0
+  stop: 0
   OnHealthChange:
     m_PersistentCalls:
       m_Calls:
@@ -1190,6 +1193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveDataEvent: {fileID: 11400000, guid: 6955f92d0ce3ee04db2aa54ef56923a5, type: 2}
+  loadDataEvent: {fileID: 11400000, guid: f4282b7e8adf7664b998d1d9af472ea9, type: 2}
 --- !u!4 &864388208
 Transform:
   m_ObjectHideFlags: 0
