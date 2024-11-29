@@ -56,11 +56,11 @@ public class PlayerController : MonoBehaviour
         inputControl.Gameplay.Field.started += Field;
         inputControl.Gameplay.Sprint.started += IsSprint;
         inputControl.Gameplay.UseSkill.started += UseSkill;
+        inputControl.Enable();
     }
 
     private void OnEnable()
-    {
-        inputControl.Enable();
+    { 
         //制作场景切换时解除注释
         //loadEvent.LoadRequestEvent += OnLoadEvent;
         //afterSceneLoadedEvent.OnEventRiased += OnAfterSceneLoadedEvent;
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isHurt && !isDead /*&& !isAttack*/)
+        if(!isHurt && !isDead && !isAttack)
         {
             Move();
             Sprint();
@@ -113,8 +113,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                isSprint = false;
-                sprintTimeCounter = 0;
+            isSprint = false;
+            sprintTimeCounter = 0;
             }
         }
         
@@ -143,8 +143,9 @@ public class PlayerController : MonoBehaviour
     {
         weaponController = GetComponent<PlayerWeaponController>();
         isUseSkill = true;
-        weaponController.skillAttack.Skill();
-    }
+        if(weaponController.skillPrefebs.Count > 0)
+            weaponController.skillAttack.Skill(character);
+    }//使用技能
     private void Field(InputAction.CallbackContext context)
     {
         isField = !isField;
@@ -153,8 +154,6 @@ public class PlayerController : MonoBehaviour
     private void IsSprint(InputAction.CallbackContext context)
     {
         isSprint = true;
-        character.invulnerable = true;
-        character.invulnerableCounter = sprintTime;
     }//冲刺
     //场景加载禁止移动
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e75ed978d54d25d428fe8a9a6aa9690d
+guid: beb695bfd415d1e4996e3fb52759c1bd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CampFire_Configed1_0
+      name: Attack_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 39
-        width: 359
-        height: 492
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 220
+        y: 109
+        width: 139
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 133aa62d7f686384cab4152422870d06
-      internalID: 426657652
+      spriteID: 36e292cba0bf51e41b44c0b2fc3b8bee
+      internalID: -396475145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CampFire_Configed1_1
+      name: Attack_1
       rect:
         serializedVersion: 2
-        x: 549
-        y: 26
-        width: 415
-        height: 493
-      alignment: 9
-      pivot: {x: 0.41743428, y: 0}
+        x: 443
+        y: 115
+        width: 145
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2b32deca5ddb01479f96501f63b1cf3
-      internalID: 36007055
+      spriteID: d34078196c1519c499a659e61ec5028d
+      internalID: -1869621853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CampFire_Configed1_2
+      name: Attack_2
       rect:
         serializedVersion: 2
-        x: 1050
-        y: 31
-        width: 410
-        height: 493
-      alignment: 9
-      pivot: {x: 0.45755795, y: 0}
+        x: 690
+        y: 115
+        width: 141
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e723512910ca9b44895b2f6dc6dcad2a
-      internalID: -2144905685
+      spriteID: 81f05ba376f6f6d4eb71e40704739e2a
+      internalID: -1534319671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CampFire_Configed1_3
+      name: Attack_3
       rect:
         serializedVersion: 2
-        x: 1586
-        y: 14
-        width: 350
-        height: 493
-      alignment: 9
-      pivot: {x: 0.47064558, y: 0}
+        x: 944
+        y: 121
+        width: 145
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d7260650f314a548a6f77ff99bc66e2
-      internalID: -1876231419
+      spriteID: 2bd997ed9190d55408ce6043646b7d8d
+      internalID: -21385651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack_4
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 119
+        width: 140
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a370e3550acaa194fb28404cc659f7d1
+      internalID: -1747776131
       vertices: []
       indices: 
       edges: []
@@ -191,28 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CampFire_Configed1.png_10: 2072719635
-      CampFire_Configed1.png_11: 252371330
-      CampFire_Configed1.png_12: 547616831
-      CampFire_Configed1.png_13: -619777360
-      CampFire_Configed1.png_14: 976617977
-      CampFire_Configed1.png_15: -645875184
-      CampFire_Configed1.png_16: 1239048669
-      CampFire_Configed1.png_17: -1456829894
-      CampFire_Configed1.png_18: 1527915770
-      CampFire_Configed1.png_19: 1337843156
-      CampFire_Configed1.png_2: -2103045821
-      CampFire_Configed1.png_20: 1985456137
-      CampFire_Configed1.png_21: -1422787249
-      CampFire_Configed1.png_5: 1188566917
-      CampFire_Configed1.png_6: -798406804
-      CampFire_Configed1.png_7: 514405090
-      CampFire_Configed1.png_8: 1293753419
-      CampFire_Configed1.png_9: 328183694
-      CampFire_Configed1_0: 426657652
-      CampFire_Configed1_1: 36007055
-      CampFire_Configed1_2: -2144905685
-      CampFire_Configed1_3: -1876231419
+      Attack_0: -396475145
+      Attack_1: -1869621853
+      Attack_2: -1534319671
+      Attack_3: -21385651
+      Attack_4: -1747776131
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
