@@ -14,15 +14,19 @@ public class BlackBeast : EnemyBase
     {
         base.Awake();
         player = GameObject.FindWithTag("Player").transform; // 根据标签锁定玩家
-        // 设置初始生命值
-        character.maxHealth = 90;
-        character.currentHealth = 90;
 
         // 初始化状态
         patrolState = new BlackBeastPatrolState();
         chaseState = new BlackBeastStraightChargeState();
         attackState = new BlackBeastSideAttackState();
         jumpState = new BlackBeastJumpAttackState();
+        currentState = patrolState;
+        currentState.OnEnter(this);
+
+        // 设置初始生命值
+        character.maxHealth = 90;
+        character.currentHealth = 90;
+
 
     }
 
@@ -30,7 +34,8 @@ public class BlackBeast : EnemyBase
     {
         attackTime += Time.deltaTime;
         distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
+        // 设置朝向（根据对象的X轴缩放值决定）
+        faceDir = new Vector3(-transform.localScale.x, 0, 0);
         if (!isDead)
         {
             // 看到玩家则切换攻击状态

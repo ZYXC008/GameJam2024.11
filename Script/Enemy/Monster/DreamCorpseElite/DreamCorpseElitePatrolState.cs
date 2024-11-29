@@ -10,11 +10,12 @@ public class DreamCorpseElitePatrolState : BaseState
         // 初始化巡逻状态
         currentEnemy = enemy;
         currentEnemy.currentSpeed = currentEnemy.normalSpeed;
-        currentEnemy.anim.SetBool("isWalking", true);
+        currentEnemy.anim.SetBool("IsWalking", true);
     }
 
     public override void LogicUpdate()
     {
+        Debug.Log("Patrol");
         if (currentEnemy.character.stop && !currentEnemy.isDead)
         {
             currentEnemy.StopMovement();
@@ -43,9 +44,14 @@ public class DreamCorpseElitePatrolState : BaseState
     public override void PhysicsUpdate()
     {
         // 检测是否需要翻转方向
-        if (currentEnemy.physicsCheck.touchLeftWall || currentEnemy.physicsCheck.touchRightWall)
+        if (currentEnemy.physicsCheck.touchLeftWall)
         {
-            currentEnemy.faceDir = new Vector3(-currentEnemy.faceDir.x, 0, 0);
+            currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
+        }
+        else if (currentEnemy.physicsCheck.touchRightWall)
+        {
+            currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = false;
             currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
         }
     }

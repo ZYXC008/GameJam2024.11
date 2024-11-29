@@ -14,6 +14,8 @@ public class PiercerStandState : BaseState
 
     public override void LogicUpdate()
     {
+        Debug.Log("Piercer Stand");
+
         if (currentEnemy.character.stop && !currentEnemy.isDead)
         {
             currentEnemy.StopMovement();
@@ -32,9 +34,10 @@ public class PiercerStandState : BaseState
             currentEnemy.GetComponent<Attack>().enabled = true; // stop标志关闭时开启伤害触发脚本
         }
 
-        if (currentEnemy is Piercer piercer && piercer.PlayerInRangeCircle())
+        if (currentEnemy is Piercer piercer && piercer.PlayerInRangeCircle() && !currentEnemy.isDead && !currentEnemy.character.stop && !currentEnemy.isHurt)
         {
             // 如果玩家进入范围，切换到冲刺状态
+            currentEnemy.anim.SetBool("IsWalking", false);
             currentEnemy.SwichState(NPCState.Chase);
         }
 

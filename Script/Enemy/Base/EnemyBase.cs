@@ -19,7 +19,7 @@ public class EnemyBase : MonoBehaviour
     [Header("基本参数")]
     public float normalSpeed;    // 普通巡逻时的移动速度
     public float chaseSpeed;     // 追击目标时的移动速度
-    [HideInInspector] public float currentSpeed; // 当前的移动速度（动态切换）
+    public float currentSpeed; // 当前的移动速度（动态切换）
     public float hurtForce;      // 受伤时的反冲力度
     public Vector3 faceDir;      // 朝向的方向向量
 
@@ -71,8 +71,8 @@ public class EnemyBase : MonoBehaviour
     private void OnEnable()
     {
         // 激活时进入初始状态（巡逻）
-        currentState = patrolState;
-        currentState.OnEnter(this); // 调用状态的进入方法
+        //currentState = patrolState;
+        //currentState.OnEnter(this); // 调用状态的进入方法
     }
 
     private void Update()
@@ -165,11 +165,6 @@ public class EnemyBase : MonoBehaviour
             NPCState.Jump => jumpState,
             _ => null
         };
-        if (newState == null)
-        {
-            Debug.Log($"Invalid NPCState: {state}. Unable to switch state.");
-            return;
-        }
         currentState.OnExit();   // 退出当前状态
         currentState = newState; // 切换到新状态
         currentState.OnEnter(this); // 进入新状态
@@ -187,13 +182,19 @@ public class EnemyBase : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
 
         isHurt = true; // 标记受伤
-        anim.SetTrigger("Hurt"); // 播放受伤动画
-        anim.SetBool("IsWalking", false);
         // 计算受伤的反冲方向
         Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
 
         rb.velocity = new Vector2(0, rb.velocity.y); // 停止当前水平速度
         StartCoroutine(OnHurt(dir)); // 启动受伤协程
+
+        // 回到当前动画的第一帧
+        anim.Play(anim.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, 0);
+
+        // 变红效果
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.red;
+        StartCoroutine(ResetColor(spriteRenderer));
     }
 
     IEnumerator OnHurt(Vector2 dir)
@@ -202,8 +203,7 @@ public class EnemyBase : MonoBehaviour
         rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
 
         // 受伤状态持续时间
-        yield return new WaitForSeconds(character.invulnerableDuration);
-        anim.SetBool("IsWalking", true);
+        yield return new WaitForSeconds(0.5f);
         isHurt = false; // 恢复正常状态
     }
 
@@ -236,10 +236,11 @@ public class EnemyBase : MonoBehaviour
     {
         rb.velocity = new Vector2(0, rb.velocity.y); // 停止当前水平速度
     }
-    public void Flip()
+    private IEnumerator ResetColor(SpriteRenderer spriteRenderer)
     {
-        // 翻转怪物方向
-        transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
-        faceDir = new Vector3(-faceDir.x, 0, 0);
+        anim.speed = 0;
+        yield return new WaitForSeconds(0.5f); // 持续红色 0.5 秒
+        anim.speed = 1;
+        spriteRenderer.color = Color.white;   // 恢复原色
     }
 }

@@ -11,8 +11,10 @@ public class DreamCorpse : EnemyBase
         base.Awake();
 
         // 初始化巡逻状态
-        currentSpeed = normalSpeed;
+
         patrolState = new DreamCorpsePatrolState();
+        currentState = patrolState;
+        currentState.OnEnter(this);
 
         // 初始化数据
         this.GetComponent<Attack>().damage = 4;
@@ -22,6 +24,8 @@ public class DreamCorpse : EnemyBase
 
     private void Update()
     {
+        // 设置朝向（根据对象的X轴缩放值决定）
+        faceDir = new Vector3(-transform.localScale.x, 0, 0);
         if (!isDead && !isHurt)
         {
             // 状态更新逻辑

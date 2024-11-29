@@ -7,7 +7,6 @@ public class Piercer : EnemyBase
 {
     [Header("穿刺者特性")]
     public float detectionRadius = 5f; // 索敌范围
-    public float chaseSpeed = 20f; // 追击速度
     public float standTimeAfterChase = 2f; // 追击后站立时间
 
     [HideInInspector] public Transform target; // 玩家目标
@@ -20,6 +19,7 @@ public class Piercer : EnemyBase
         patrolState = new PiercerStandState();
         chaseState = new PiercerChaseState();
         currentState = patrolState;
+        currentState.OnEnter(this);
 
         // 初始化数据
         this.GetComponent<Attack>().damage = 8;
@@ -29,9 +29,10 @@ public class Piercer : EnemyBase
 
     private void Update()
     {
+        // 设置朝向（根据对象的X轴缩放值决定）
+        faceDir = new Vector3(-transform.localScale.x, 0, 0);
         if (!isDead)
         {
-            PlayerInRangeCircle();
             currentState?.LogicUpdate();
         }
     }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4749217075469392352}
   - component: {fileID: 963311154089426078}
   - component: {fileID: 1051714294264739134}
+  - component: {fileID: 772966788335033451}
   m_Layer: 0
   m_Name: Piercer
   m_TagString: Untagged
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 645815942, guid: c9a554bec64f3ad40ae610158f8becf5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,10 +105,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  character: {fileID: 0}
   anim: {fileID: 0}
   physicsCheck: {fileID: 0}
   normalSpeed: 0
-  chaseSpeed: 0
+  chaseSpeed: 5
   currentSpeed: 0
   hurtForce: 0
   faceDir: {x: 0, y: 0, z: 0}
@@ -122,11 +124,10 @@ MonoBehaviour:
   checkDistance: 0
   attackLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   isHurt: 0
   isDead: 0
   detectionRadius: 5
-  chaseSpeed: 20
   standTimeAfterChase: 2
   target: {fileID: 0}
 --- !u!114 &934331960816874413
@@ -215,7 +216,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.4, y: 1.51}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -301,6 +302,9 @@ MonoBehaviour:
   runOffHealth: 0
   invulnerableDuration: 0
   invulnerable: 0
+  stopDuration: 0
+  stopCounter: 0
+  stop: 0
   OnHealthChange:
     m_PersistentCalls:
       m_Calls: []
@@ -310,3 +314,16 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &772966788335033451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934678627289583277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf4624431b640b498f2fa5b82ccfcaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0

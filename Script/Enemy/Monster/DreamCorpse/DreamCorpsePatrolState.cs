@@ -39,9 +39,14 @@ public class DreamCorpsePatrolState : BaseState
     public override void PhysicsUpdate()
     {
         // 检测是否需要翻转方向
-        if (currentEnemy.physicsCheck.touchLeftWall || currentEnemy.physicsCheck.touchRightWall)
+        if (currentEnemy.physicsCheck.touchLeftWall)
         {
-            currentEnemy.faceDir = new Vector3(-currentEnemy.faceDir.x, 0, 0);
+            currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
+        }
+        else if (currentEnemy.physicsCheck.touchRightWall)
+        {
+            currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = false;
             currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
         }
     }

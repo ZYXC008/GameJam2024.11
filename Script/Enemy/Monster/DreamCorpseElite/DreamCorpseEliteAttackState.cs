@@ -16,7 +16,7 @@ public class DreamCorpseEliteAttackState : BaseState
 
         // 初始化速度
         currentEnemy.currentSpeed = currentEnemy.chaseSpeed;
-        currentEnemy.anim.SetBool("isWalking", false);
+        currentEnemy.anim.SetBool("IsWalking", false);
     }
 
     public override void LogicUpdate()
@@ -38,6 +38,13 @@ public class DreamCorpseEliteAttackState : BaseState
             currentEnemy.anim.speed = 1;
             currentEnemy.GetComponent<Attack>().enabled = true; // stop标志关闭时开启伤害触发脚本
         }
+
+        // 攻击逻辑
+        if (!hasAttacked && currentEnemy is DreamCorpseElite elite && elite.target != null)
+        {
+            currentEnemy.anim.SetTrigger("Attack");
+        }
+
         //attackTime += Time.deltaTime;
         //if (attackTime >= attackTimer)
         //{
@@ -48,15 +55,11 @@ public class DreamCorpseEliteAttackState : BaseState
 
     public override void PhysicsUpdate()
     {
-        // 攻击逻辑
-        if (hasAttacked && currentEnemy is DreamCorpseElite elite && elite.target != null)
-        {
-            currentEnemy.anim.SetTrigger("Attack");
-        }
+
     }
 
     public override void OnExit()
     {
-        currentEnemy.SwichState(NPCState.Patrol);
+        currentEnemy.anim.SetBool("IsWalking", true);
     }
 }
