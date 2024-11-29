@@ -19,7 +19,7 @@ public class Character : MonoBehaviour, ISaveable
 
     [Header("ÊÜÉËÎŞµĞ")]
     public float invulnerableDuration;
-    private float invulnerableCounter;
+    public float invulnerableCounter;
     public bool invulnerable;
 
     public UnityEvent<Character> OnHealthChange;

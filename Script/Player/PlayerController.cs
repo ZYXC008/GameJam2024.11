@@ -113,8 +113,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-            isSprint = false;
-            sprintTimeCounter = 0;
+                isSprint = false;
+                sprintTimeCounter = 0;
             }
         }
         
@@ -153,6 +153,8 @@ public class PlayerController : MonoBehaviour
     private void IsSprint(InputAction.CallbackContext context)
     {
         isSprint = true;
+        character.invulnerable = true;
+        character.invulnerableCounter = sprintTime;
     }//≥Â¥Ã
     //≥°æ∞º”‘ÿΩ˚÷π“∆∂Ø
     private void OnLoadEvent(GameSceneSO arg0, Vector3 arg1, bool arg2)

@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class SavePoint : MonoBehaviour, TransitionIInteractable
 {
+    public Animator anim;
     [Header("事件监听")]
     public VoidEventSO SaveGameEvent;
 
     [Header("基本参数")]
     public bool isDone;
 
-    private void OnEnable()
+    private void Awake()
     {
-        
+        anim = GetComponent<Animator>();
     }
     public void TriggerAction()
     {
-        if (!isDone)
-        {
-            isDone = true;
+        isDone = true;
             //改变动画
-
-            SaveGameEvent.RaiseEvent();
-            this.gameObject.tag = "Untagged";
-        }
+        anim.SetBool("isDone", isDone);
+        SaveGameEvent.RaiseEvent();
     }
 }
