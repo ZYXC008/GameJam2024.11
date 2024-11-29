@@ -19,7 +19,7 @@ public class Character : MonoBehaviour, ISaveable
 
     [Header("受伤无敌")]
     public float invulnerableDuration;
-    private float invulnerableCounter;
+    public float invulnerableCounter;
     public bool invulnerable;
 
     [Header("定身")]
