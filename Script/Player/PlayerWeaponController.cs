@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -81,19 +83,28 @@ public class PlayerWeaponController : MonoBehaviour
     }
     private void SwitchSkillUp(InputAction.CallbackContext context)
     {
-        if (skillCount == 0)
+        if(skillPrefebs.Count > 0)
         {
-            skillCount = skillPrefebs.Count - 1;
+            if (skillCount == 0)
+            {
+                skillCount = skillPrefebs.Count - 1;
+            }
+            else
+            {
+                skillCount--;
+            }
+            skillAttack = skillPrefebs[skillCount].GetComponent<Weapon>();
+
         }
-        else
-        {
-            skillCount--;
-        }
-        skillAttack = skillPrefebs[skillCount].GetComponent<Weapon>();
+        
     }
     private void SwitchSkillDown(InputAction.CallbackContext context)
     {
-        skillCount = (skillCount + 1) % skillPrefebs.Count;
-        skillAttack = skillPrefebs[skillCount].GetComponent<Weapon>();
+        if (skillPrefebs.Count > 0)
+        {
+            skillCount = (skillCount + 1) % skillPrefebs.Count;
+            skillAttack = skillPrefebs[skillCount].GetComponent<Weapon>();
+        }
+        
     }
 }

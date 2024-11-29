@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isHurt && !isDead /*&& !isAttack*/)
+        if(!isHurt && !isDead && !isAttack)
         {
             Move();
             Sprint();
@@ -143,7 +143,8 @@ public class PlayerController : MonoBehaviour
     {
         weaponController = GetComponent<PlayerWeaponController>();
         isUseSkill = true;
-        weaponController.skillAttack.Skill(character);
+        if(weaponController.skillPrefebs.Count > 0)
+            weaponController.skillAttack.Skill(character);
     }//使用技能
     private void Field(InputAction.CallbackContext context)
     {

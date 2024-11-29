@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerAttack : Attack
 {
     public PlayerWeaponController controller;
-    private void Awake()
+
+
+    private void Update()
     {
-        controller = GetComponent<PlayerWeaponController>();
         damage = controller.weaponAttack.damage;
     }
     private void OnTriggerStay2D(Collider2D collision)

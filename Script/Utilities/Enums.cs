@@ -14,5 +14,5 @@ public enum PersistentType
 
 public enum WeaponType
 {
-    Normal,BigArea,StopEnemy
+    Normal = 1,BigArea = 2,StopEnemy = 3
 }

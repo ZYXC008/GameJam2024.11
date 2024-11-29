@@ -8,7 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     private Rigidbody2D rb;
     private PhysicsCheck physicsCheck;
     private PlayerController playerController;
-    private PlayerWeaponController playerWeaponController;
+    public  PlayerWeaponController playerWeaponController;
 
     private void Awake()
     {
@@ -16,11 +16,11 @@ public class PlayerAnimation : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         playerController = GetComponent<PlayerController>();
-        playerWeaponController = GetComponent<PlayerWeaponController>();
     }
 
     private void Update()
-    {
+    {   
+
         SetAnimation();
     }
     public void SetAnimation()
