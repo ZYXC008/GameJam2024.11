@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D coll;
     private Character character;
     private PlayerWeaponController weaponController;
+    public PolygonCollider2D skillAttackArea;
+
     [Header("ÊÂ¼þ¼àÌý")]
     public SceneLoadEventSO loadEvent;
     public VoidEventSO afterSceneLoadedEvent;
