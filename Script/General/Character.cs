@@ -30,12 +30,16 @@ public class Character : MonoBehaviour, ISaveable
     public UnityEvent<Character> OnHealthChange;
     public UnityEvent<Transform> OnTakeDamage;
     public UnityEvent OnDead;
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+        currentMP = maxMP;
+    }
     private void OnEnable()
     {
         NewGameEvent.OnEventRiased += NewGame;
         ISaveable saveable = this;
         saveable.RegisterSaveData();
-        currentHealth = maxHealth;
     }
 
     private void OnDisable()

@@ -32,7 +32,15 @@ public class Sign : MonoBehaviour
     }
     private void Update()
     {
-        signSprite.GetComponent<SpriteRenderer>().enabled = (canPress || canPick) ;
+        if (canPress || canPick) 
+        { 
+            signSprite.GetComponent<SpriteRenderer>().enabled = true ;
+        }
+        else
+        {
+            signSprite.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        
         signSprite.transform.localScale = playerTransform.localScale;
     }
     private void OnConfirm(InputAction.CallbackContext context)

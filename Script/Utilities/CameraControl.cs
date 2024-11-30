@@ -13,6 +13,10 @@ public class CameraControl : MonoBehaviour
     private CinemachineConfiner2D confiner2D;
     public CinemachineImpulseSource impluseSource;
 
+    private void Awake()
+    {
+        confiner2D = GetComponent<CinemachineConfiner2D>();
+    }
     private void OnEnable()
     {
         cameraShakeEvent.OnEventRiased += OnCameraShakeEvent;
@@ -23,6 +27,7 @@ public class CameraControl : MonoBehaviour
         cameraShakeEvent.OnEventRiased -= OnCameraShakeEvent;
         afterSceneLoadedEvent.OnEventRiased -= OnAfterSceneLoadedEvent;
     }
+
 
     private void OnAfterSceneLoadedEvent()
     {

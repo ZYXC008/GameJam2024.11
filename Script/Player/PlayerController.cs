@@ -9,6 +9,7 @@ using UnityEngine.Events;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
 
+
 public class PlayerController : MonoBehaviour
 {
     public PlayerInputControl inputControl;
@@ -42,6 +43,10 @@ public class PlayerController : MonoBehaviour
     public bool isSprint;
     public bool isUseSkill;
 
+    [Header("物理材质")]
+    public PhysicsMaterial2D normal;
+    public PhysicsMaterial2D wall;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -60,17 +65,17 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnEnable()
-    { 
+    {
         //制作场景切换时解除注释
-        //loadEvent.LoadRequestEvent += OnLoadEvent;
-        //afterSceneLoadedEvent.OnEventRiased += OnAfterSceneLoadedEvent;
+        loadEvent.LoadRequestEvent += OnLoadEvent;
+        afterSceneLoadedEvent.OnEventRiased += OnAfterSceneLoadedEvent;
     }
 
     private void OnDisable()
     {
         inputControl.Disable();
-        //loadEvent.LoadRequestEvent -= OnLoadEvent;
-        //afterSceneLoadedEvent.OnEventRiased -= OnAfterSceneLoadedEvent;
+        loadEvent.LoadRequestEvent -= OnLoadEvent;
+        afterSceneLoadedEvent.OnEventRiased -= OnAfterSceneLoadedEvent;
     }
 
     private void Update()
@@ -131,6 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         //playerAnimation.PlayAttack();
         isAttack = true;
+        rb.velocity = new Vector2(0, rb.velocity.y);
         weaponController = GetComponent<PlayerWeaponController>();
         if (weaponController.buffTimes > 0)
         {
@@ -183,6 +189,7 @@ public class PlayerController : MonoBehaviour
     }
     public void CheckState()
     {
+        coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
         if (physicsCheck.isGround && currentJumpTimes != 0)
         {
             currentJumpTimes = 0;
