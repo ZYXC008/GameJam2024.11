@@ -11,6 +11,7 @@ public class BlackBeast : EnemyBase
     public int changeStateCount = 0;
     public float detectionRadius = 10f; //索敌范围
     [HideInInspector] public Transform player;       // 当前锁定的玩家
+    [HideInInspector] public Transform target;
     private float distanceToPlayer; // 距离玩家的距离
     public override void Awake()
     {
@@ -59,6 +60,11 @@ public class BlackBeast : EnemyBase
             {
                 Move();
             }
+
+            if (currentState == chaseState)
+            {
+                ChaseMove();
+            }
         }
     }
 
@@ -82,24 +88,32 @@ public class BlackBeast : EnemyBase
             transform.localScale = new Vector3(faceDir.x, 1, 1);
 
             // 使敌人朝玩家方向移动
-            rb.velocity = direction * currentSpeed;
+            rb.velocity = direction * currentSpeed * Time.deltaTime;
         }
+    }
 
+    public void ChaseMove()
+    {
+        // 计算敌人到玩家的 X 轴方向
+        float directionX = player.position.x - transform.position.x;
+
+        // 只更新 X 轴的速度，保留 Y 轴速度
+        rb.velocity = new Vector2(Mathf.Sign(directionX) * currentSpeed * Time.deltaTime, rb.velocity.y);
     }
 
     public void ChangeState()
     {
 
         // 根据与玩家的距离决定攻击方式
-        //if (0 <= distanceToPlayer && distanceToPlayer <= 10f)
-        //{
-        //    changeStateCount = 0;
-        //}
-
         if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
         {
-            changeStateCount = 1;
+            changeStateCount = 0;
         }
+
+        //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
+        //{
+        //    changeStateCount = 1;
+        //}
 
         //if (distanceToPlayer >= 100f)
         //{
@@ -132,10 +146,10 @@ public class BlackBeast : EnemyBase
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, attackLayer);
         if (hit != null)
         {
-            player = hit.transform;
+            target = hit.transform;
             return true;
         }
-        player = null;
+        target = null;
         return false;
     }
     private void OnDrawGizmos()
@@ -153,5 +167,21 @@ public class BlackBeast : EnemyBase
     public void ResetAttack()
     {
         GetComponent<Attack>().damage = 10;
+    }
+
+    public void JumpAttack()
+    {
+        attack.damage = 10;
+        rb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
+    }
+
+    public void ChargeAttack()
+    {
+        attack.damage = 5;
+    }
+    public void JumpAttack1()
+    {
+        attack.damage = 10;
+        rb.AddForce(Vector2.down * 10f, ForceMode2D.Impulse);
     }
 }

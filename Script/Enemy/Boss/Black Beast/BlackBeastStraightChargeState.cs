@@ -11,7 +11,7 @@ public class BlackBeastStraightChargeState : BaseState
     public override void OnEnter(EnemyBase enemy)
     {
         currentEnemy = enemy;
-
+        currentEnemy.currentSpeed = currentEnemy.chaseSpeed;
         currentEnemy.anim.SetBool("IsWalking", false);
         currentEnemy.anim.SetTrigger("Charge");
         currentEnemy.GetComponent<Attack>().damage = 5;
@@ -45,15 +45,22 @@ public class BlackBeastStraightChargeState : BaseState
     public override void PhysicsUpdate()
     {
         // 检测是否撞到墙 撞到则停止1s并且切换到巡逻状态
-        if (physicsCheck != null && (physicsCheck.touchLeftWall || physicsCheck.touchRightWall))
+        if (physicsCheck != null && physicsCheck.touchLeftWall)
         {
+            currentEnemy.GetComponent<SpriteRenderer>().flipX = true;
+            currentEnemy.StartCoroutine(StopAndChange());
+        }
+
+        if (physicsCheck != null && physicsCheck.touchRightWall)
+        {
+            currentEnemy.GetComponent<SpriteRenderer>().flipX = false;
             currentEnemy.StartCoroutine(StopAndChange());
         }
     }
 
     public override void OnExit()
     {
-
+        currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
     }
 
     IEnumerator StopAndChange()

@@ -39,12 +39,12 @@ public class BlackBeastPatrolState : BaseState
     public override void PhysicsUpdate()
     {
         // 检测是否需要翻转方向
-        if (currentEnemy is BlackBeast blackBeast && blackBeast.player == null && currentEnemy.physicsCheck.touchLeftWall)
+        if (currentEnemy is BlackBeast blackBeast && blackBeast.target == null && currentEnemy.physicsCheck.touchLeftWall)
         {
             currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = true;
             currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
         }
-        else if (currentEnemy is BlackBeast blackBeast1 && blackBeast1.player == null && currentEnemy.physicsCheck.touchRightWall)
+        else if (currentEnemy is BlackBeast blackBeast1 && blackBeast1.target == null && currentEnemy.physicsCheck.touchRightWall)
         {
             currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = false;
             currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);

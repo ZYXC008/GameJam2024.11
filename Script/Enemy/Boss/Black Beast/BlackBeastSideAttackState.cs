@@ -89,6 +89,6 @@ public class BlackBeastSideAttackState : BaseState
 
     public override void OnExit()
     {
-
+        currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
     }
 }

@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 6978635819827978700}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.933626, y: 6.5832686, z: 0}
+  m_LocalPosition: {x: -16.985, y: 6.695, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 866436579, guid: 17246da1ea9d7024daed1e518101b95d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,8 +109,8 @@ MonoBehaviour:
   attack: {fileID: 0}
   anim: {fileID: 0}
   physicsCheck: {fileID: 0}
-  normalSpeed: 1
-  chaseSpeed: 0
+  normalSpeed: 10
+  chaseSpeed: 50
   currentSpeed: 0
   hurtForce: 0
   faceDir: {x: 0, y: 0, z: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   changeStateCount: 0
   detectionRadius: 10
   player: {fileID: 0}
+  target: {fileID: 0}
 --- !u!114 &1570468523732505037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,19 +153,56 @@ MonoBehaviour:
   shield: 0
   runOffHealth: 0
   invulnerableDuration: 0
+  invulnerableCounter: 0
   invulnerable: 0
   stopDuration: 0
   stopCounter: 0
   stop: 0
   OnHealthChange:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6978635819827978700}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTakeDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2798390150763195374}
+        m_TargetAssemblyTypeName: EnemyBase, Assembly-CSharp
+        m_MethodName: OnTakeDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDead:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2798390150763195374}
+        m_TargetAssemblyTypeName: EnemyBase, Assembly-CSharp
+        m_MethodName: OnDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3555084171003957672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,18 +292,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.06757498, y: -0.824877}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.78, y: 1.74}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.1883802, y: 0.1052165}
   m_EdgeRadius: 0
 --- !u!70 &5244159361418536409
 CapsuleCollider2D:
@@ -299,9 +337,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: -0.021343227, y: 0.060297262}
+  m_Size: {x: 2.9874737, y: 1.9591818}
+  m_Direction: 1
 --- !u!50 &113301832148011579
 Rigidbody2D:
   serializedVersion: 4

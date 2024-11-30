@@ -11,7 +11,6 @@ public class BlackBeastJumpAttackState : BaseState
         currentEnemy = enemy;
         currentEnemy.anim.SetBool("IsWalking", false);
         currentEnemy.anim.SetTrigger("JumpAttack");
-        currentEnemy.rb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
     }
 
     public override void LogicUpdate()
@@ -53,25 +52,26 @@ public class BlackBeastJumpAttackState : BaseState
 
     public override void OnExit()
     {
-        // 攻击动画结束后等待1s并且切换到巡逻状态
-        currentEnemy.StartCoroutine(StopAndChange());
+        //// 攻击动画结束后等待1s并且切换到巡逻状态
+        //currentEnemy.StartCoroutine(StopAndChange());
+        currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
     }
 
-    IEnumerator StopAndChange()
-    {
-        if (!currentEnemy.isDead)
-        {
-            // 停止移动
-            currentEnemy.StopMovement();
-        }
-        // 等待1秒
-        yield return new WaitForSeconds(1f);
+    //IEnumerator StopAndChange()
+    //{
+    //    if (!currentEnemy.isDead)
+    //    {
+    //        // 停止移动
+    //        currentEnemy.StopMovement();
+    //    }
+    //    // 等待1秒
+    //    yield return new WaitForSeconds(1f);
 
-        if (!currentEnemy.isDead)
-        {
-            currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
-            // 切换到巡逻状态
-            currentEnemy.SwichState(NPCState.Patrol);
-        }
-    }
+    //    if (!currentEnemy.isDead)
+    //    {
+    //        currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
+    //        // 切换到巡逻状态
+    //        currentEnemy.SwichState(NPCState.Patrol);
+    //    }
+    //}
 }

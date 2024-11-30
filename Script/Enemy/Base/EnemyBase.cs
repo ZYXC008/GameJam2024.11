@@ -212,23 +212,44 @@ public class EnemyBase : MonoBehaviour
     {
         // 敌人死亡逻辑
         gameObject.layer = 2; // 将对象设置为忽略层
-        anim.SetBool("Dead", true); // 播放死亡动画
+        //anim.SetBool("Dead", true); // 播放死亡动画
         isDead = true; // 标记为死亡状态
-        StartCoroutine(DestroyAfterAnimation()); // 启动销毁协程
+
+        // 开始渐隐并销毁
+        StartCoroutine(FadeOutAndDestroy());
     }
 
-    public IEnumerator DestroyAfterAnimation()
+    private IEnumerator FadeOutAndDestroy()
     {
-        // 获取当前动画的长度
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        float animationLength = stateInfo.length;
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // 等待动画播放完毕
-        yield return new WaitForSeconds(animationLength);
+        if (spriteRenderer == null)
+        {
+            Debug.LogWarning("SpriteRenderer not found on enemy. Destroying directly.");
+            Destroy(gameObject); // 如果没有 SpriteRenderer，直接销毁
+            yield break;
+        }
 
-        // 销毁当前游戏对象
+        // 获取当前颜色
+        Color color = spriteRenderer.color;
+
+        // 渐隐持续时间
+        float fadeDuration = 1.5f; // 可调整
+        float fadeStep = 0.05f;    // 每次减少的透明度值
+        float fadeInterval = fadeDuration * fadeStep; // 每次更新的时间间隔
+
+        while (color.a > 0)
+        {
+            color.a -= fadeStep; // 减少透明度
+            spriteRenderer.color = color; // 更新颜色
+
+            yield return new WaitForSeconds(fadeInterval); // 等待一段时间
+        }
+
+        // 确保销毁
         Destroy(gameObject);
     }
+
     public virtual void StopMovement()
     {
         rb.velocity = Vector2.zero; // 让怪物静止
