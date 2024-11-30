@@ -151,8 +151,9 @@ public class PlayerController : MonoBehaviour
     {
         weaponController = GetComponent<PlayerWeaponController>();
         isUseSkill = true;
+        skillAttackArea.gameObject.SetActive(true);
         if(weaponController.skillPrefebs.Count > 0)
-            weaponController.skillAttack.Skill(character);
+            weaponController.skillAttack.Skill(skillAttackArea.GetComponent<PlayerAttack>().character);
     }//使用技能
     private void Field(InputAction.CallbackContext context)
     {

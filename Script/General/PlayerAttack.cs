@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : Attack
 {
     public PlayerWeaponController controller;
-
+    public Character character;
 
     private void Update()
     {
@@ -14,5 +14,6 @@ public class PlayerAttack : Attack
     private void OnTriggerStay2D(Collider2D collision)
     {
         collision.GetComponent<Character>()?.TakeDamage(this);
+        character = collision.GetComponent<Character>();
     }
 }
