@@ -105,17 +105,20 @@ public class BlackBeast : EnemyBase
 
         else if (PlayerInRangeCircle())
         {
-            // 计算敌人到玩家的方向
-            Vector2 direction = (player.position - transform.position).normalized;
+            if (player != null)
+            {
+                // 计算敌人到玩家的方向
+                Vector2 direction = (player.position - transform.position).normalized;
 
-            // 获得朝向
-            faceDir = new Vector2(-Mathf.Sign(direction.x), rb.velocity.y);
+                // 获得朝向
+                faceDir = new Vector2(-Mathf.Sign(direction.x), rb.velocity.y);
 
-            // 改变黑之兽的朝向
-            transform.localScale = new Vector3(faceDir.x, 1, 1);
+                // 改变黑之兽的朝向
+                transform.localScale = new Vector3(faceDir.x, 1, 1);
 
-            // 使敌人朝玩家方向移动
-            rb.velocity = direction * currentSpeed * Time.deltaTime;
+                // 使敌人朝玩家方向移动
+                rb.velocity = direction * currentSpeed * Time.deltaTime;
+            }
         }
     }
 

@@ -9,10 +9,11 @@ public class Switch : MonoBehaviour, TransitionIInteractable
     public Sprite openSprite;
     public Sprite closeSprite;
     public Animator anim;
-
+    public AudioSource audioSource;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void OnEnable()
     {
@@ -23,12 +24,15 @@ public class Switch : MonoBehaviour, TransitionIInteractable
         if (!isDone)
         {
             OpenSwitch();
-            Debug.Log("¥•∑¢");
+            Debug.Log("Ëß¶Âèë");
         }
     }
     public void OpenSwitch()
     {
         isDone = true;
         anim.SetTrigger("isDone");
+        audioSource.clip = Resources.Load<AudioClip>("Sound/SwitchOpen");
+        audioSource.volume = 0.2f;
+        audioSource.Play();
     }
 }
