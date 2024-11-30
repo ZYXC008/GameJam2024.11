@@ -22,7 +22,7 @@ public class Piercer : EnemyBase
         currentState.OnEnter(this);
 
         // 初始化数据
-        this.GetComponent<Attack>().damage = 8;
+        attack.damage = 8;
         character.maxHealth = 9;
         character.currentHealth = character.maxHealth;
     }
