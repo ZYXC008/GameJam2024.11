@@ -9,7 +9,6 @@ public class EnemyBase : MonoBehaviour
     // Rigidbody2D组件，用于处理物理相关的操作
     public Rigidbody2D rb;
     [HideInInspector] public Character character;
-    [HideInInspector] public Attack attack;
 
     // 动画控制器
     [HideInInspector] public Animator anim;
@@ -58,7 +57,7 @@ public class EnemyBase : MonoBehaviour
         anim = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
         character = GetComponent<Character>();
-        attack = GetComponent<Attack>();
+
         // 初始化基本参数
         currentSpeed = normalSpeed;
         waitTimeCounter = waitTime;

@@ -17,7 +17,7 @@ public class DreamCorpse : EnemyBase
         currentState.OnEnter(this);
 
         // 初始化数据
-        attack.damage = 4;
+        this.GetComponent<Attack>().damage = 4;
         character.maxHealth = 12;
         character.currentHealth = character.maxHealth;
     }

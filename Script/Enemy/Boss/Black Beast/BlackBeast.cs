@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlackBeast : EnemyBase
 {
     [Header("黑之兽攻击状态设置")]
     public float attackTimer = 0;
-    private float attackTime = 2f;
+    private float attackTime;
     public int changeStateCount = 0;
-    public float detectionRadius = 10f; //索敌范围
-    [HideInInspector] public Transform player;       // 当前锁定的玩家
+    private Transform player;       // 当前锁定的玩家
     private float distanceToPlayer; // 距离玩家的距离
     public override void Awake()
     {
@@ -28,21 +26,20 @@ public class BlackBeast : EnemyBase
         // 设置初始生命值
         character.maxHealth = 90;
         character.currentHealth = 90;
-        attack.damage = 10; // 攻击伤害
+
 
     }
 
     private void Update()
     {
-        attackTimer += Time.deltaTime;
-        player = GameObject.FindWithTag("Player").transform; // 根据标签锁定玩家
+        attackTime += Time.deltaTime;
         distanceToPlayer = Vector2.Distance(transform.position, player.position);
         // 设置朝向（根据对象的X轴缩放值决定）
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
         if (!isDead)
         {
             // 看到玩家则切换攻击状态
-            if (PlayerInRangeCircle())
+            if (FoundPlayer())
             {
                 ChangeState();
             }
@@ -60,23 +57,26 @@ public class BlackBeast : EnemyBase
                 Move();
             }
         }
+
+
+
     }
 
     public override void Move()
     {
-        if (!PlayerInRangeCircle())
+        if (!FoundPlayer())
         {
             // 基础巡逻移动逻辑
             base.Move();
         }
 
-        else if (PlayerInRangeCircle())
+        else if (FoundPlayer())
         {
             // 计算敌人到玩家的方向
             Vector2 direction = (player.position - transform.position).normalized;
 
             // 获得朝向
-            faceDir = new Vector2(-Mathf.Sign(direction.x), rb.velocity.y);
+            faceDir = new Vector2(Mathf.Sign(direction.x), faceDir.y);
 
             // 改变黑之兽的朝向
             transform.localScale = new Vector3(faceDir.x, 1, 1);
@@ -91,25 +91,25 @@ public class BlackBeast : EnemyBase
     {
 
         // 根据与玩家的距离决定攻击方式
-        //if (0 <= distanceToPlayer && distanceToPlayer <= 10f)
-        //{
-        //    changeStateCount = 0;
-        //}
+        if (0 <= distanceToPlayer && distanceToPlayer <= 10f)
+        {
+            changeStateCount = 0;
+        }
 
-        if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
+        if (50 <= distanceToPlayer && distanceToPlayer <= 100f)
         {
             changeStateCount = 1;
         }
 
-        //if (distanceToPlayer >= 100f)
-        //{
-        //    changeStateCount = 2;
-        //}
+        if (distanceToPlayer >= 100f)
+        {
+            changeStateCount = 2;
+        }
 
         // 攻击cd结束后切换状态
-        if (attackTimer >= attackTime)
+        if (attackTime >= attackTimer)
         {
-            attackTimer = 0;
+            attackTime = 0;
             switch (changeStateCount)
             {
                 case 0:
@@ -125,33 +125,6 @@ public class BlackBeast : EnemyBase
                     break;
             }
         }
-    }
-    public bool PlayerInRangeCircle()
-    {
-        // 检测玩家是否在索敌范围内
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, attackLayer);
-        if (hit != null)
-        {
-            player = hit.transform;
-            return true;
-        }
-        player = null;
-        return false;
-    }
-    private void OnDrawGizmos()
-    {
-        // 可视化索敌范围
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    }
 
-    public void SideAttack()
-    {
-        GetComponent<Attack>().damage = 8;
-    }
-
-    public void ResetAttack()
-    {
-        GetComponent<Attack>().damage = 10;
     }
 }
