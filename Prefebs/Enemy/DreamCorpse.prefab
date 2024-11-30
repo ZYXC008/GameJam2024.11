@@ -18,7 +18,8 @@ GameObject:
   - component: {fileID: 305516200508341290}
   - component: {fileID: 3863807923341653250}
   - component: {fileID: 5802488162412363371}
-  m_Layer: 0
+  - component: {fileID: -6627258867680235867}
+  m_Layer: 7
   m_Name: DreamCorpse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.72, y: 0.83, z: 0}
-  m_LocalScale: {x: 4, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1841973753
-  m_SortingLayer: 3
+  m_SortingLayerID: 47523965
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -831727252, guid: 1970a94c1e7ce0147b8495b611c6f9c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -161,14 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc5414dd2c6b6f46a64a4bc421dd3ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewGameEvent: {fileID: 0}
+  NewGameEvent: {fileID: 11400000, guid: 4b551df86f235734a97516f065dc7ed1, type: 2}
   maxHealth: 0
   currentHealth: 0
   maxMP: 0
   currentMP: 0
   shield: 0
   runOffHealth: 0
-  invulnerableDuration: 0
+  invulnerableDuration: 1
   invulnerableCounter: 0
   invulnerable: 0
   stopDuration: 0
@@ -232,14 +233,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1c8d2f1aa5ad44c987f6c79fa53199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manual: 0
-  bottomOffset: {x: 0, y: 0}
-  leftOffset: {x: 0, y: 0}
-  rightOffset: {x: 0, y: 0}
-  checkRaduis: 0
+  manual: 1
+  bottomOffset: {x: -0.9, y: -0.55}
+  leftOffset: {x: -1.5, y: 0.1}
+  rightOffset: {x: 1.5, y: 0.1}
+  checkRaduis: 0.08
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   isGround: 0
   touchLeftWall: 0
   touchRightWall: 0
@@ -302,18 +303,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0024311543, y: -0.3554061}
+  m_Offset: {x: 0.007193804, y: -0.5935554}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.11, y: 0.74}
+    oldSize: {x: 1.75, y: 1.17}
     newSize: {x: 1.11, y: 0.74}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1264532, y: 0.07839641}
+  m_Size: {x: 1.945601, y: 0.02129662}
   m_EdgeRadius: 0
 --- !u!70 &5802488162412363371
 CapsuleCollider2D:
@@ -330,7 +331,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -347,6 +348,20 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.269971e-10, y: 0.0026553753}
-  m_Size: {x: 1.2000005, y: 0.8009066}
+  m_Offset: {x: -0.03333986, y: 0.007418518}
+  m_Size: {x: 2.152514, y: 1.191454}
   m_Direction: 1
+--- !u!114 &-6627258867680235867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980557838339445982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f95c93cb6b7ab418d3a57fbf9c397b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistentType: 0
+  ID: f3815cdd-334e-4835-a1e7-a0eadcbd5a17

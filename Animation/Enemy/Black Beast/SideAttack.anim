@@ -184,7 +184,21 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.43333334
+  - time: 0.13333334
+    functionName: SideAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.21666667
+    functionName: SideAttackSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.65
     functionName: SideAttack
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -192,7 +206,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.71666664
-    functionName: SideAttack
+    functionName: SideAttackSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -15,6 +15,9 @@ public class BlackBeastStraightChargeState : BaseState
         currentEnemy.anim.SetBool("IsWalking", false);
         currentEnemy.anim.SetTrigger("Charge");
         currentEnemy.GetComponent<Attack>().damage = 5;
+        currentEnemy.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Sound/Charge");
+        currentEnemy.GetComponent<AudioSource>().volume = 0.7f;
+        currentEnemy.GetComponent<AudioSource>().Play();
         // 获取 PhysicsCheck 组件
         physicsCheck = currentEnemy.GetComponent<PhysicsCheck>();
 
@@ -44,40 +47,16 @@ public class BlackBeastStraightChargeState : BaseState
 
     public override void PhysicsUpdate()
     {
-        // 检测是否撞到墙 撞到则停止1s并且切换到巡逻状态
-        if (physicsCheck != null && physicsCheck.touchLeftWall)
+        // 检测悬崖或墙壁，进行翻转
+        if ((!currentEnemy.physicsCheck.isGround || currentEnemy.physicsCheck.touchLeftWall || currentEnemy.physicsCheck.touchRightWall))
         {
-            currentEnemy.GetComponent<SpriteRenderer>().flipX = true;
-            currentEnemy.StartCoroutine(StopAndChange());
-        }
-
-        if (physicsCheck != null && physicsCheck.touchRightWall)
-        {
-            currentEnemy.GetComponent<SpriteRenderer>().flipX = false;
-            currentEnemy.StartCoroutine(StopAndChange());
+            // 翻转方向
+            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
         }
     }
 
     public override void OnExit()
     {
         currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
-    }
-
-    IEnumerator StopAndChange()
-    {
-        if (!currentEnemy.isDead)
-        {
-            // 停止移动
-            currentEnemy.StopMovement();
-        }
-        // 等待1秒
-        yield return new WaitForSeconds(1f);
-
-        if (!currentEnemy.isDead)
-        {
-            currentEnemy.GetComponent<BlackBeast>().attackTimer = 0; // 重置攻击计时器
-            // 切换到巡逻状态
-            currentEnemy.SwichState(NPCState.Patrol);
-        }
     }
 }

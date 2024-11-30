@@ -26,7 +26,7 @@ public class DreamCorpse : EnemyBase
     {
         // 设置朝向（根据对象的X轴缩放值决定）
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
-        if (!isDead && !isHurt)
+        if (!isDead)
         {
             // 状态更新逻辑
             currentState?.LogicUpdate();
@@ -37,9 +37,10 @@ public class DreamCorpse : EnemyBase
     {
         if (!isDead && !isHurt)
         {
+            currentState?.PhysicsUpdate();
             Move();
         }
-        currentState?.PhysicsUpdate();
+
     }
 
 }

@@ -204,7 +204,7 @@ public class EnemyBase : MonoBehaviour
         rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
 
         // 受伤状态持续时间
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1);
         isHurt = false; // 恢复正常状态
     }
 
@@ -261,7 +261,7 @@ public class EnemyBase : MonoBehaviour
     private IEnumerator ResetColor(SpriteRenderer spriteRenderer)
     {
         anim.speed = 0;
-        yield return new WaitForSeconds(0.5f); // 持续红色 0.5 秒
+        yield return new WaitForSeconds(1); // 持续红色 0.5 秒
         anim.speed = 1;
         spriteRenderer.color = Color.white;   // 恢复原色
     }

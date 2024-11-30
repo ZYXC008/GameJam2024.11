@@ -5,17 +5,25 @@ using UnityEngine;
 public class DreamCorpseElitePatrolState : BaseState
 {
     private int speedCount = 0;
+    private float lastCollideTime = 1f;
+    public float lastCollideTimer;
+    private int CollideCount;
     public override void OnEnter(EnemyBase enemy)
     {
         // 初始化巡逻状态
         currentEnemy = enemy;
-        currentEnemy.currentSpeed = currentEnemy.normalSpeed;
+        CollideCount = 0;
+        lastCollideTimer = lastCollideTime + 1f; // 防止第一次碰撞时，不触发翻转
         currentEnemy.anim.SetBool("IsWalking", true);
+        currentEnemy.currentSpeed = currentEnemy.normalSpeed;
     }
 
     public override void LogicUpdate()
     {
-        Debug.Log("Patrol");
+        if (CollideCount != 0)
+        {
+            lastCollideTimer += Time.deltaTime;
+        }
         if (currentEnemy.character.stop && !currentEnemy.isDead)
         {
             currentEnemy.StopMovement();
@@ -43,15 +51,12 @@ public class DreamCorpseElitePatrolState : BaseState
 
     public override void PhysicsUpdate()
     {
-        // 检测是否需要翻转方向
-        if (currentEnemy.physicsCheck.touchLeftWall)
+        // 检测悬崖或墙壁，进行翻转
+        if (lastCollideTimer >= lastCollideTime && (!currentEnemy.physicsCheck.isGround || currentEnemy.physicsCheck.touchLeftWall || currentEnemy.physicsCheck.touchRightWall))
         {
-            currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
-        }
-        else if (currentEnemy.physicsCheck.touchRightWall)
-        {
-            currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            lastCollideTimer = 0;
+            CollideCount++;
+            // 翻转方向
             currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
         }
     }

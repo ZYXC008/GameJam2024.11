@@ -10,11 +10,11 @@ public class Piercer : EnemyBase
     public float standTimeAfterChase = 2f; // 追击后站立时间
 
     [HideInInspector] public Transform target; // 玩家目标
-
+    private AudioSource audioSource;
     public override void Awake()
     {
         base.Awake();
-
+        audioSource = GetComponent<AudioSource>();
         // 初始化状态机
         patrolState = new PiercerStandState();
         chaseState = new PiercerChaseState();
@@ -72,4 +72,10 @@ public class Piercer : EnemyBase
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
+    public void AttackSound()
+    {
+        audioSource.clip = Resources.Load<AudioClip>("Sound/SideAttack");
+        audioSource.volume = 0.5f;
+        audioSource.Play();
+    }
 }

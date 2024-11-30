@@ -11,13 +11,14 @@ public class PiercerChaseState : BaseState
     private float chaseTime = 2f;
     private bool attackTriggered = false; // 确保只触发一次攻击
     private bool isChaseCoroutineRunning = false; // 防止协程重复运行
-
+    private bool velocitySet;
     public override void OnEnter(EnemyBase enemy)
     {
         currentEnemy = enemy;
         speedCount = 0;
         chaseTimer = 0; // 重置追击计时
         isChasing = true;
+        velocitySet = false;
         attackTriggered = false; // 重置攻击触发状态
         currentEnemy.currentSpeed = currentEnemy.chaseSpeed;
     }
@@ -68,17 +69,45 @@ public class PiercerChaseState : BaseState
                     attackTriggered = true; // 确保只触发一次
                 }
 
-                // 持续追向玩家
-                Vector2 chaseDirection = ((Vector2)(piercer.target.position - piercer.transform.position)).normalized;
+                // 持续追向玩家，仅沿 X 轴方向追击
+                Vector2 chaseDirection = new Vector2(piercer.target.position.x - piercer.transform.position.x, 0).normalized;
                 piercer.rb.velocity = chaseDirection * piercer.chaseSpeed;
             }
             else if (chaseTimer >= chaseTime && !isChaseCoroutineRunning)
             {
                 piercer.StartCoroutine(StandAfterChase());
             }
-
         }
     }
+
+    //public override void PhysicsUpdate()
+    //{
+    //    if (isChasing && currentEnemy is Piercer piercer && piercer.target != null && !currentEnemy.isDead)
+    //    {
+    //        if (chaseTimer < chaseTime)
+    //        {
+    //            // 触发攻击动画，只触发一次
+    //            if (!attackTriggered)
+    //            {
+    //                currentEnemy.anim.SetTrigger("Attack");
+    //                attackTriggered = true; // 确保只触发一次
+    //            }
+
+    //            // 仅第一次追击时设置速度
+    //            if (!velocitySet)
+    //            {
+    //                Vector2 chaseDirection = new Vector2(piercer.target.position.x - piercer.transform.position.x, 0).normalized;
+    //                piercer.rb.velocity = chaseDirection * piercer.chaseSpeed;
+    //                velocitySet = true; // 确保速度只设置一次
+    //            }
+    //        }
+    //        else if (chaseTimer >= chaseTime && !isChaseCoroutineRunning)
+    //        {
+    //            piercer.StartCoroutine(StandAfterChase());
+    //            velocitySet = false; // 重置标记，以便下一次追击可以重新设置速度
+    //        }
+    //    }
+    //}
 
     public override void OnExit()
     {

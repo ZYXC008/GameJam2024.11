@@ -22,26 +22,36 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 517712163, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.1
+    - time: 0.06666667
       value: {fileID: -918128584, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.2
+    - time: 0.13333334
       value: {fileID: 981509972, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.3
+    - time: 0.2
       value: {fileID: 523783324, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.4
+    - time: 0.26666668
       value: {fileID: -1923444784, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.5
+    - time: 0.33333334
       value: {fileID: -506718606, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.6
+    - time: 0.4
       value: {fileID: 1959289298, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.7
+    - time: 0.46666667
       value: {fileID: -1374483067, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.8
+    - time: 0.53333336
       value: {fileID: 939260967, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 0.9
+    - time: 0.6
       value: {fileID: 311242842, guid: b202163d02874744493f78fd3d39e34e, type: 3}
-    - time: 1
+    - time: 0.6666667
       value: {fileID: -1805055197, guid: b202163d02874744493f78fd3d39e34e, type: 3}
+    - time: 0.73333335
+      value: {fileID: 1815033734, guid: b202163d02874744493f78fd3d39e34e, type: 3}
+    - time: 0.8
+      value: {fileID: 1789378108, guid: b202163d02874744493f78fd3d39e34e, type: 3}
+    - time: 0.8666667
+      value: {fileID: -1157103446, guid: b202163d02874744493f78fd3d39e34e, type: 3}
+    - time: 0.93333334
+      value: {fileID: 1972594065, guid: 799edd59b6d7c9e41aba4605fb9ebea8, type: 3}
+    - time: 1
+      value: {fileID: -1487132457, guid: 799edd59b6d7c9e41aba4605fb9ebea8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -75,6 +85,11 @@ AnimationClip:
     - {fileID: 939260967, guid: b202163d02874744493f78fd3d39e34e, type: 3}
     - {fileID: 311242842, guid: b202163d02874744493f78fd3d39e34e, type: 3}
     - {fileID: -1805055197, guid: b202163d02874744493f78fd3d39e34e, type: 3}
+    - {fileID: 1815033734, guid: b202163d02874744493f78fd3d39e34e, type: 3}
+    - {fileID: 1789378108, guid: b202163d02874744493f78fd3d39e34e, type: 3}
+    - {fileID: -1157103446, guid: b202163d02874744493f78fd3d39e34e, type: 3}
+    - {fileID: 1972594065, guid: 799edd59b6d7c9e41aba4605fb9ebea8, type: 3}
+    - {fileID: -1487132457, guid: 799edd59b6d7c9e41aba4605fb9ebea8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -109,6 +124,13 @@ AnimationClip:
     messageOptions: 0
   - time: 1
     functionName: ResetAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: SwichState
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

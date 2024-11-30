@@ -100,12 +100,12 @@ TextureImporter:
       name: Move_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 511
-        width: 278
-        height: 174
+        x: 11
+        y: 717
+        width: 339
+        height: 208
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: Move_1
       rect:
         serializedVersion: 2
-        x: 319
-        y: 511
-        width: 286
-        height: 172
+        x: 370
+        y: 718
+        width: 346
+        height: 207
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: Move_2
       rect:
         serializedVersion: 2
-        x: 630
-        y: 513
-        width: 293
-        height: 175
+        x: 722
+        y: 719
+        width: 347
+        height: 204
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +163,12 @@ TextureImporter:
       name: Move_3
       rect:
         serializedVersion: 2
-        x: 929
-        y: 517
-        width: 294
-        height: 169
+        x: 1120
+        y: 721
+        width: 350
+        height: 201
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: Move_4
       rect:
         serializedVersion: 2
-        x: 1252
-        y: 510
-        width: 292
-        height: 175
+        x: 7
+        y: 482
+        width: 348
+        height: 204
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: Move_5
       rect:
         serializedVersion: 2
-        x: 18
-        y: 253
-        width: 287
-        height: 172
+        x: 386
+        y: 474
+        width: 343
+        height: 204
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,12 +226,12 @@ TextureImporter:
       name: Move_6
       rect:
         serializedVersion: 2
-        x: 326
-        y: 256
-        width: 286
-        height: 174
+        x: 745
+        y: 481
+        width: 339
+        height: 204
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +247,12 @@ TextureImporter:
       name: Move_7
       rect:
         serializedVersion: 2
-        x: 643
-        y: 256
-        width: 290
-        height: 171
+        x: 1132
+        y: 492
+        width: 343
+        height: 204
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,12 +268,12 @@ TextureImporter:
       name: Move_8
       rect:
         serializedVersion: 2
-        x: 949
-        y: 256
-        width: 292
-        height: 172
+        x: 14
+        y: 240
+        width: 347
+        height: 208
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,12 +289,12 @@ TextureImporter:
       name: Move_9
       rect:
         serializedVersion: 2
-        x: 1262
-        y: 258
-        width: 294
-        height: 168
+        x: 385
+        y: 244
+        width: 353
+        height: 201
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -310,12 +310,12 @@ TextureImporter:
       name: Move_10
       rect:
         serializedVersion: 2
-        x: 26
-        y: 33
-        width: 289
-        height: 172
+        x: 750
+        y: 247
+        width: 350
+        height: 205
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -331,12 +331,12 @@ TextureImporter:
       name: Move_11
       rect:
         serializedVersion: 2
-        x: 325
-        y: 26
-        width: 289
-        height: 171
+        x: 1138
+        y: 250
+        width: 345
+        height: 204
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -352,12 +352,12 @@ TextureImporter:
       name: Move_12
       rect:
         serializedVersion: 2
-        x: 655
-        y: 27
-        width: 283
-        height: 171
+        x: 1160
+        y: 17
+        width: 337
+        height: 207
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

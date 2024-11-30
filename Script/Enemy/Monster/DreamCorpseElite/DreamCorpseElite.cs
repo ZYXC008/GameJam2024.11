@@ -8,7 +8,6 @@ public class DreamCorpseElite : EnemyBase
     public float detectionRadius = 5f; // 索敌范围
     public float attackRadius = 3f;  // 攻击范围
     public Transform attackPos; // 攻击位置
-
     [HideInInspector] public Transform target; // 玩家目标
 
     public override void Awake()
@@ -28,8 +27,9 @@ public class DreamCorpseElite : EnemyBase
 
     private void Update()
     {
-        // 设置朝向（根据对象的X轴缩放值决定）
+        //设置朝向（根据对象的X轴缩放值决定）
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
+
         if (!isDead)
         {
             currentState?.LogicUpdate();
@@ -41,23 +41,33 @@ public class DreamCorpseElite : EnemyBase
         if (!isDead && !isHurt)
         {
             currentState?.PhysicsUpdate();
+            Move();
         }
-        Move();
+
     }
 
     public bool PlayerInRangeCircle()
     {
-        // 检测玩家是否在索敌范围内
+        // 检测玩家是否在面朝方向的索敌范围内
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, attackLayer);
+
         if (hit != null)
         {
-            target = hit.transform;
-            return true;
+            // 计算玩家相对于怪物的方向
+            Vector2 directionToPlayer = (hit.transform.position - transform.position).normalized;
+            float faceDirection = -Mathf.Sign(transform.localScale.x); // 1 表示面朝右，-1 表示面朝左
+
+            // 检测玩家是否在面朝方向
+            if (Mathf.Sign(directionToPlayer.x) == faceDirection)
+            {
+                target = hit.transform;
+                return true;
+            }
         }
+
         target = null;
         return false;
     }
-
 
     private void OnDrawGizmos()
     {
@@ -115,4 +125,17 @@ public class DreamCorpseElite : EnemyBase
     {
         attackPos.gameObject.GetComponent<Attack>().damage = 0;
     }
+
+    //public bool PlayerInRangeCircle()
+    //{
+    //    // 检测玩家是否在索敌范围内
+    //    Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, attackLayer);
+    //    if (hit != null)
+    //    {
+    //        target = hit.transform;
+    //        return true;
+    //    }
+    //    target = null;
+    //    return false;
+    //}
 }

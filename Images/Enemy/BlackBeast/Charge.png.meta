@@ -100,10 +100,10 @@ TextureImporter:
       name: Charge_0
       rect:
         serializedVersion: 2
-        x: 65
-        y: 479
-        width: 157
-        height: 154
+        x: 13
+        y: 680
+        width: 342
+        height: 203
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,10 +121,10 @@ TextureImporter:
       name: Charge_1
       rect:
         serializedVersion: 2
-        x: 304
-        y: 478
-        width: 154
-        height: 157
+        x: 422
+        y: 684
+        width: 345
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,10 +142,10 @@ TextureImporter:
       name: Charge_2
       rect:
         serializedVersion: 2
-        x: 546
-        y: 473
-        width: 163
-        height: 159
+        x: 811
+        y: 703
+        width: 355
+        height: 176
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: Charge_3
       rect:
         serializedVersion: 2
-        x: 777
-        y: 461
-        width: 160
-        height: 167
+        x: 1193
+        y: 722
+        width: 344
+        height: 154
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Charge_4
       rect:
         serializedVersion: 2
-        x: 930
-        y: 536
-        width: 7
-        height: 15
+        x: 32
+        y: 365
+        width: 348
+        height: 241
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: Charge_5
       rect:
         serializedVersion: 2
-        x: 1012
-        y: 469
-        width: 156
-        height: 154
+        x: 436
+        y: 393
+        width: 289
+        height: 189
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: Charge_6
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 477
-        width: 221
-        height: 145
+        x: 794
+        y: 390
+        width: 204
+        height: 201
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +247,10 @@ TextureImporter:
       name: Charge_7
       rect:
         serializedVersion: 2
-        x: 60
-        y: 196
-        width: 262
-        height: 184
+        x: 1070
+        y: 375
+        width: 201
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,10 +268,10 @@ TextureImporter:
       name: Charge_8
       rect:
         serializedVersion: 2
-        x: 1086
-        y: 53
-        width: 261
-        height: 155
+        x: 1329
+        y: 387
+        width: 210
+        height: 207
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +289,10 @@ TextureImporter:
       name: Charge_9
       rect:
         serializedVersion: 2
-        x: 487
-        y: 57
-        width: 265
-        height: 118
+        x: 14
+        y: 91
+        width: 209
+        height: 215
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,10 +310,10 @@ TextureImporter:
       name: Charge_10
       rect:
         serializedVersion: 2
-        x: 786
-        y: 58
-        width: 273
-        height: 134
+        x: 261
+        y: 97
+        width: 204
+        height: 202
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,6 +323,69 @@ TextureImporter:
       bones: []
       spriteID: 4eb9c6dfbe46b354a867a38068a5f0e7
       internalID: -1805055197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charge_11
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 110
+        width: 289
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14cb10680ab73fc448f0d891f221fcad
+      internalID: 1815033734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charge_12
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 73
+        width: 348
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc2769de1ff7f6a4e9c012858fd8a110
+      internalID: 1789378108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charge_13
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 129
+        width: 344
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78c4543770b60204dae3709a72b38cd0
+      internalID: -1157103446
       vertices: []
       indices: 
       edges: []
@@ -341,6 +404,9 @@ TextureImporter:
       Charge_0: 517712163
       Charge_1: -918128584
       Charge_10: -1805055197
+      Charge_11: 1815033734
+      Charge_12: 1789378108
+      Charge_13: -1157103446
       Charge_2: 981509972
       Charge_3: 523783324
       Charge_4: -1923444784

@@ -13,11 +13,13 @@ public class BlackBeast : EnemyBase
     [HideInInspector] public Transform player;       // 当前锁定的玩家
     [HideInInspector] public Transform target;
     private float distanceToPlayer; // 距离玩家的距离
+    private AudioSource audioSource;
     public override void Awake()
     {
         base.Awake();
-        player = GameObject.FindWithTag("Player").transform; // 根据标签锁定玩家
-
+        //player = GameObject.FindWithTag("Player").transform; // 根据标签锁定玩家
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = 0.15f;
         // 初始化状态
         patrolState = new BlackBeastPatrolState();
         chaseState = new BlackBeastStraightChargeState();
@@ -38,6 +40,7 @@ public class BlackBeast : EnemyBase
         attackTimer += Time.deltaTime;
         player = GameObject.FindWithTag("Player").transform; // 根据标签锁定玩家
         distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        Debug.Log(currentState);
         // 设置朝向（根据对象的X轴缩放值决定）
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
         if (!isDead)
@@ -104,21 +107,22 @@ public class BlackBeast : EnemyBase
     public void ChangeState()
     {
 
-        // 根据与玩家的距离决定攻击方式
+        //根据与玩家的距离决定攻击方式
+        //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
+        //{
+        //    changeStateCount = 0;
+        //}
+
         if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
         {
-            changeStateCount = 0;
+            changeStateCount = 1;
         }
 
         //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
         //{
-        //    changeStateCount = 1;
-        //}
-
-        //if (distanceToPlayer >= 100f)
-        //{
         //    changeStateCount = 2;
         //}
+
 
         // 攻击cd结束后切换状态
         if (attackTimer >= attackTime)
@@ -182,6 +186,20 @@ public class BlackBeast : EnemyBase
     public void JumpAttack1()
     {
         attack.damage = 10;
-        rb.AddForce(Vector2.down * 10f, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.down * 15f, ForceMode2D.Impulse);
+    }
+
+    public void JumpSound()
+    {
+        audioSource.clip = Resources.Load<AudioClip>("Sound/Jump");
+        audioSource.volume = 0.15f;
+        audioSource.Play();
+    }
+
+    public void SideAttackSound()
+    {
+        audioSource.clip = Resources.Load<AudioClip>("Sound/SideAttack");
+        audioSource.volume = 0.5f;
+        audioSource.Play();
     }
 }
