@@ -110,6 +110,12 @@ public class Character : MonoBehaviour, ISaveable
         if (isField)
         {
             currentHealth -= runOffHealth;
+            if(currentHealth <= 0)
+            {
+                
+                currentHealth = 0;
+                OnDead?.Invoke();
+            }
             OnHealthChange?.Invoke(this);
         }
            

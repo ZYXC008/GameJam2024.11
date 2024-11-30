@@ -177,6 +177,8 @@ public class PlayerController : MonoBehaviour
     public void PlayerDead()
     {
         isDead = true;
+        isField = false;
+        fieldMask.SetField(isField);
         inputControl.Gameplay.Disable();
     }
     public void CheckState()
