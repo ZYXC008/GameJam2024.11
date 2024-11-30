@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public PlayerStuaBar playerStuaBar;
     public PlayerWeaponController playerWeaponController;
 
-    [Header("ÊÂ¼ş¼àÌı")]
+    [Header("äº‹ä»¶ç›‘å¬")]
     public CharacterEventSO healthEvent;
     public SceneLoadEventSO loadEvent;
 
