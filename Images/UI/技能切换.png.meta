@@ -268,7 +268,7 @@ TextureImporter:
       name: "\u6280\u80FD\u5207\u6362_12"
       rect:
         serializedVersion: 2
-        x: 1962
+        x: 1963
         y: 4847
         width: 232
         height: 203
@@ -352,7 +352,7 @@ TextureImporter:
       name: "\u6280\u80FD\u5207\u6362_16"
       rect:
         serializedVersion: 2
-        x: 1574
+        x: 1575
         y: 4464
         width: 228
         height: 203
@@ -407,90 +407,6 @@ TextureImporter:
       bones: []
       spriteID: bbf6210f416b665468e503512a9c8fed
       internalID: 1892874487
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u6280\u80FD\u5207\u6362_19"
-      rect:
-        serializedVersion: 2
-        x: 2188
-        y: 4282
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 95b24790e2373dd4ea2ab3603fdd3d63
-      internalID: -533810562
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u6280\u80FD\u5207\u6362_20"
-      rect:
-        serializedVersion: 2
-        x: 2595
-        y: 4277
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 875effb6ebb1d2d4eb20875d14d49ee3
-      internalID: -966400815
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u6280\u80FD\u5207\u6362_21"
-      rect:
-        serializedVersion: 2
-        x: 2212
-        y: 4267
-        width: 11
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8cda4a9948b3a854aaad2c55dbcf6fc3
-      internalID: -634680669
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\u6280\u80FD\u5207\u6362_22"
-      rect:
-        serializedVersion: 2
-        x: 2614
-        y: 4262
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: debc55dbf4942a24b9557e9a31cd93f1
-      internalID: -2003465726
       vertices: []
       indices: 
       edges: []

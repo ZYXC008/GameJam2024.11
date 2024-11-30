@@ -10,6 +10,7 @@ public class PlayerStuaBar : MonoBehaviour
     public Image MPImage;
     public Image Weapon_Normal;
     public Image Weapon_BigArea;
+    public Image Skill_Stop;
     private void Awake()
     {
         healthDelayImage.fillAmount = healthImage.fillAmount;

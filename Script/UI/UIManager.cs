@@ -35,6 +35,10 @@ public class UIManager : MonoBehaviour
             playerStuaBar.Weapon_Normal.gameObject.SetActive(false);
             playerStuaBar.Weapon_BigArea.gameObject.SetActive(true);
         }
+        if(playerWeaponController.skillPrefebs.Count > 0)
+        {
+            playerStuaBar.Skill_Stop.gameObject.SetActive(true);
+        }
     }
     private void OnLoadEvent(GameSceneSO sceneToLoad, Vector3 arg1, bool arg2)
     {
