@@ -16,7 +16,7 @@ public class DreamCorpseElite : EnemyBase
         base.Awake();
         character.maxHealth = 30;
         character.currentHealth = character.maxHealth;
-        this.GetComponent<Attack>().damage = 8;
+        attack.damage = 8;
         attackPos.gameObject.GetComponent<Attack>().damage = 0;
 
         // 初始化状态机
@@ -78,18 +78,37 @@ public class DreamCorpseElite : EnemyBase
         Debug.Log("执行狂梦尸攻击");
         // 获取攻击范围内的玩家对象
         Collider2D hit = Physics2D.OverlapCircle(attackPos.position, attackRadius, attackLayer);
-        if (hit == null)
-        {
-            Debug.Log("没有找到玩家对象");
-        }
-        if (hit != null && hit.TryGetComponent(out Character character))
-        {
-            // 造成伤害
-            attackPos.gameObject.GetComponent<Attack>().damage = 8;
-            character.TakeDamage(attackPos.gameObject.GetComponent<Attack>());
-            Debug.Log($"Hit {character.gameObject.name} for {attackPos.gameObject.GetComponent<Attack>().damage} damage.");
-        }
 
+        if (hit != null)
+        {
+            // 优先尝试直接获取 Character
+            Character character = hit.GetComponent<Character>();
+
+            // 如果直接获取失败，尝试从父级或子级查找
+            if (character == null)
+            {
+                character = hit.GetComponentInParent<Character>();
+            }
+
+            if (character == null)
+            {
+                character = hit.GetComponentInChildren<Character>();
+            }
+
+            // 检查最终是否获取到 Character
+            if (character != null)
+            {
+                Debug.Log("进入攻击状态");
+                Attack attack = attackPos.gameObject.GetComponent<Attack>();
+                if (attack != null)
+                {
+                    attack.damage = 8;
+                    character.TakeDamage(attack);
+                    Debug.Log($"Hit {character.gameObject.name} for {attack.damage} damage.");
+                }
+
+            }
+        }
     }
 
     public void ResetAttackDamage()
