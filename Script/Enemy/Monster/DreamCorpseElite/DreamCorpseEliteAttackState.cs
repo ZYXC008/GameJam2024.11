@@ -6,13 +6,11 @@ public class DreamCorpseEliteAttackState : BaseState
 {
     private int speedCount = 0;
     private bool hasAttacked;
-    //private float attackTimer = 2f;
-    //public float attackTime;
+
     public override void OnEnter(EnemyBase enemy)
     {
         currentEnemy = enemy;
         hasAttacked = false;
-        //attackTime = 0;
 
         // 初始化速度
         currentEnemy.currentSpeed = currentEnemy.chaseSpeed;
@@ -44,13 +42,6 @@ public class DreamCorpseEliteAttackState : BaseState
         {
             currentEnemy.anim.SetTrigger("Attack");
         }
-
-        //attackTime += Time.deltaTime;
-        //if (attackTime >= attackTimer)
-        //{
-        //    attackTime = 0;
-        //    hasAttacked = false;
-        //}
     }
 
     public override void PhysicsUpdate()

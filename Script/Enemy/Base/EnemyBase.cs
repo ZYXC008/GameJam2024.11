@@ -171,7 +171,7 @@ public class EnemyBase : MonoBehaviour
         currentState.OnEnter(this); // 进入新状态
     }
 
-    public void OnTakeDamage(Transform attackTrans)
+    public virtual void OnTakeDamage(Transform attackTrans)
     {
         // 受到攻击时的逻辑
         attacker = attackTrans;
@@ -198,7 +198,7 @@ public class EnemyBase : MonoBehaviour
         StartCoroutine(ResetColor(spriteRenderer));
     }
 
-    IEnumerator OnHurt(Vector2 dir)
+    public IEnumerator OnHurt(Vector2 dir)
     {
         // 应用反冲力
         rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
@@ -219,7 +219,7 @@ public class EnemyBase : MonoBehaviour
         StartCoroutine(FadeOutAndDestroy());
     }
 
-    private IEnumerator FadeOutAndDestroy()
+    public IEnumerator FadeOutAndDestroy()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 

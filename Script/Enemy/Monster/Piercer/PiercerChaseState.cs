@@ -69,7 +69,7 @@ public class PiercerChaseState : BaseState
                     attackTriggered = true; // 确保只触发一次
                 }
 
-                // 持续追向玩家，仅沿 X 轴方向追击
+                // 持续追向玩家,仅沿X轴方向追击
                 Vector2 chaseDirection = new Vector2(piercer.target.position.x - piercer.transform.position.x, 0).normalized;
                 piercer.rb.velocity = chaseDirection * piercer.chaseSpeed;
             }

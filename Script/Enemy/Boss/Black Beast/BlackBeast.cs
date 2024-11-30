@@ -71,6 +71,30 @@ public class BlackBeast : EnemyBase
         }
     }
 
+    public override void OnTakeDamage(Transform attackTrans)
+    {
+        // 受到攻击时的逻辑
+        attacker = attackTrans;
+
+        // 根据攻击者位置调整朝向
+        if (attackTrans.position.x - transform.position.x > 0)
+            transform.localScale = new Vector3(-1, 1, 1);
+        if (attackTrans.position.x - transform.position.x < 0)
+            transform.localScale = new Vector3(1, 1, 1);
+
+        isHurt = true; // 标记受伤
+        // 计算受伤的反冲方向
+        Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
+
+        rb.velocity = new Vector2(0, rb.velocity.y); // 停止当前水平速度
+        StartCoroutine(OnHurt(dir)); // 启动受伤协程
+
+        // 变红效果
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.red;
+        StartCoroutine(ResetColor(spriteRenderer));
+    }
+
     public override void Move()
     {
         if (!PlayerInRangeCircle())
@@ -162,7 +186,13 @@ public class BlackBeast : EnemyBase
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
-
+    private IEnumerator ResetColor(SpriteRenderer spriteRenderer)
+    {
+        anim.speed = 0;
+        yield return new WaitForSeconds(1); // 持续红色 0.5 秒
+        anim.speed = 1;
+        spriteRenderer.color = Color.white;   // 恢复原色
+    }
     public void SideAttack()
     {
         GetComponent<Attack>().damage = 8;

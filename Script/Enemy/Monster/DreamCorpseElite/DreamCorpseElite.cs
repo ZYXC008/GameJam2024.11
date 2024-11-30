@@ -9,10 +9,11 @@ public class DreamCorpseElite : EnemyBase
     public float attackRadius = 3f;  // 攻击范围
     public Transform attackPos; // 攻击位置
     [HideInInspector] public Transform target; // 玩家目标
-
+    private AudioSource audioSource;
     public override void Awake()
     {
         base.Awake();
+        audioSource = GetComponent<AudioSource>();
         character.maxHealth = 30;
         character.currentHealth = character.maxHealth;
         attack.damage = 8;
@@ -38,12 +39,36 @@ public class DreamCorpseElite : EnemyBase
 
     void FixedUpdate()
     {
-        if (!isDead && !isHurt)
+        if (!isDead)
         {
             currentState?.PhysicsUpdate();
             Move();
         }
 
+    }
+
+    public override void OnTakeDamage(Transform attackTrans)
+    {
+        // 受到攻击时的逻辑
+        attacker = attackTrans;
+
+        // 根据攻击者位置调整朝向
+        if (attackTrans.position.x - transform.position.x > 0)
+            transform.localScale = new Vector3(-1, 1, 1);
+        if (attackTrans.position.x - transform.position.x < 0)
+            transform.localScale = new Vector3(1, 1, 1);
+
+        isHurt = true; // 标记受伤
+        // 计算受伤的反冲方向
+        Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x, 0).normalized;
+
+        rb.velocity = new Vector2(0, rb.velocity.y); // 停止当前水平速度
+        StartCoroutine(OnHurt(dir)); // 启动受伤协程
+
+        // 变红效果
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.red;
+        StartCoroutine(ResetColor(spriteRenderer));
     }
 
     public bool PlayerInRangeCircle()
@@ -64,7 +89,6 @@ public class DreamCorpseElite : EnemyBase
                 return true;
             }
         }
-
         target = null;
         return false;
     }
@@ -126,6 +150,13 @@ public class DreamCorpseElite : EnemyBase
         attackPos.gameObject.GetComponent<Attack>().damage = 0;
     }
 
+    public void AttackSound()
+    {
+        audioSource.clip = Resources.Load<AudioClip>("Sound/Jump");
+        audioSource.volume = 0.15f;
+        audioSource.Play();
+    }
+
     //public bool PlayerInRangeCircle()
     //{
     //    // 检测玩家是否在索敌范围内
@@ -138,4 +169,9 @@ public class DreamCorpseElite : EnemyBase
     //    target = null;
     //    return false;
     //}
+    private IEnumerator ResetColor(SpriteRenderer spriteRenderer)
+    {
+        yield return new WaitForSeconds(1); // 持续红色 0.5 秒
+        spriteRenderer.color = Color.white;   // 恢复原色
+    }
 }

@@ -5,21 +5,30 @@ using UnityEngine;
 public class SavePoint : MonoBehaviour, TransitionIInteractable
 {
     public Animator anim;
-    [Header("事件监听")]
+    private AudioSource audioSource;
+    [Header("浜嬩欢鐩戝惉")]
     public VoidEventSO SaveGameEvent;
 
-    [Header("基本参数")]
+    [Header("鍩烘湰鍙傛暟")]
     public bool isDone;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
     public void TriggerAction()
     {
         isDone = true;
-            //改变动画
+        //鏀瑰彉鍔ㄧ敾
         anim.SetBool("isDone", isDone);
         SaveGameEvent.RaiseEvent();
+    }
+
+    public void Confirm()
+    {
+        audioSource.clip = Resources.Load<AudioClip>("Sound/Confirm");
+        audioSource.volume = 0.2f;
+        audioSource.Play();
     }
 }

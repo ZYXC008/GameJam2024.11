@@ -8,11 +8,14 @@ public class DreamCorpseElitePatrolState : BaseState
     private float lastCollideTime = 1f;
     public float lastCollideTimer;
     private int CollideCount;
+    private float attackTimer;
+    public float attackTime = 1.5f;
     public override void OnEnter(EnemyBase enemy)
     {
         // 初始化巡逻状态
         currentEnemy = enemy;
         CollideCount = 0;
+        attackTimer = 0;
         lastCollideTimer = lastCollideTime + 1f; // 防止第一次碰撞时，不触发翻转
         currentEnemy.anim.SetBool("IsWalking", true);
         currentEnemy.currentSpeed = currentEnemy.normalSpeed;
@@ -20,6 +23,7 @@ public class DreamCorpseElitePatrolState : BaseState
 
     public override void LogicUpdate()
     {
+        attackTimer += Time.deltaTime;
         if (CollideCount != 0)
         {
             lastCollideTimer += Time.deltaTime;
@@ -42,7 +46,7 @@ public class DreamCorpseElitePatrolState : BaseState
             currentEnemy.GetComponent<Attack>().enabled = true; // stop标志关闭时开启伤害触发脚本
         }
 
-        if (currentEnemy is DreamCorpseElite elite && elite.PlayerInRangeCircle())
+        if (attackTimer >= attackTime && currentEnemy is DreamCorpseElite elite && elite.PlayerInRangeCircle())
         {
             // 如果玩家进入范围，切换到攻击状态
             currentEnemy.SwichState(NPCState.Attack);
