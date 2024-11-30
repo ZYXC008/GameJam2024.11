@@ -12,7 +12,7 @@ public class BlackBeastStraightChargeState : BaseState
     {
         currentEnemy = enemy;
 
-        currentEnemy.anim.SetBool("IsWalking", false);
+        currentEnemy.anim.SetBool("isWalking", false);
         currentEnemy.anim.SetTrigger("Charge");
         currentEnemy.GetComponent<Attack>().damage = 5;
         // 获取 PhysicsCheck 组件

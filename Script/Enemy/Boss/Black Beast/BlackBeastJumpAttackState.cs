@@ -9,7 +9,7 @@ public class BlackBeastJumpAttackState : BaseState
     public override void OnEnter(EnemyBase enemy)
     {
         currentEnemy = enemy;
-        currentEnemy.anim.SetBool("IsWalking", false);
+        currentEnemy.anim.SetBool("isWalking", false);
         currentEnemy.anim.SetTrigger("JumpAttack");
         currentEnemy.rb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
     }
