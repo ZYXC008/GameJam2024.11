@@ -105,20 +105,21 @@ public class BlackBeast : EnemyBase
     {
 
         // 根据与玩家的距离决定攻击方式
-        if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
-        {
-            changeStateCount = 0;
-        }
+        //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
+        //{
+        //    changeStateCount = 0;
+        //}
 
         //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
         //{
         //    changeStateCount = 1;
         //}
 
-        //if (distanceToPlayer >= 100f)
-        //{
-        //    changeStateCount = 2;
-        //}
+        if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
+        {
+            changeStateCount = 2;
+        }
+
 
         // 攻击cd结束后切换状态
         if (attackTimer >= attackTime)
@@ -182,6 +183,6 @@ public class BlackBeast : EnemyBase
     public void JumpAttack1()
     {
         attack.damage = 10;
-        rb.AddForce(Vector2.down * 10f, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.down * 15f, ForceMode2D.Impulse);
     }
 }

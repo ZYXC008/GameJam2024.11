@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour
     {
         //playerAnimation.PlayAttack();
         isAttack = true;
+        rb.velocity = new Vector2(0, rb.velocity.y);
         weaponController = GetComponent<PlayerWeaponController>();
         if (weaponController.buffTimes > 0)
         {
