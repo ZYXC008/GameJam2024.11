@@ -644,7 +644,7 @@ MonoBehaviour:
   currentMP: 0
   shield: 0
   runOffHealth: 0.01
-  invulnerableDuration: 1
+  invulnerableDuration: 2
   invulnerableCounter: 0
   invulnerable: 0
   stopDuration: 0
@@ -738,7 +738,7 @@ MonoBehaviour:
   afterSceneLoadedEvent: {fileID: 11400000, guid: ee0bf418a1713174bbad47d8393a58d2, type: 2}
   speed: 300
   jumpForce: 8
-  hurtForce: 0
+  hurtForce: 2
   jumpTimes: 1
   currentJumpTimes: 0
   sprintForce: 4
@@ -1515,6 +1515,95 @@ MonoBehaviour:
   playerPosition: {fileID: 425296308}
   fixPosition: {x: -0.14, y: 1.55}
   isField: 0
+--- !u!1001 &1165266922
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.1807382
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8500656
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 188672185276357856, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422504867389240685, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802488162412363371, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980557838339445982, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: m_Name
+      value: DreamCorpse
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206355111053383602, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: maxMP
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206355111053383602, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206355111053383602, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: NewGameEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b551df86f235734a97516f065dc7ed1, type: 2}
+    - target: {fileID: 8617124260654448084, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617124260654448084, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: isDead
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617124260654448084, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
+      propertyPath: attackLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3950e368d3fd78849a522cca13c78cc8, type: 3}
 --- !u!1 &1175625433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,3 +2302,4 @@ SceneRoots:
   - {fileID: 1584181317}
   - {fileID: 691420575}
   - {fileID: 864388208}
+  - {fileID: 1165266922}
