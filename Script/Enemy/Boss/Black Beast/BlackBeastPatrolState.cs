@@ -7,8 +7,11 @@ public class BlackBeastPatrolState : BaseState
     private int speedCount = 0;
     public override void OnEnter(EnemyBase enemy)
     {
+        Debug.Log("进入黑之兽巡逻状态");
         currentEnemy = enemy;
-        currentEnemy.anim.SetBool("isWalking", true);
+        currentEnemy.currentSpeed = currentEnemy.normalSpeed;
+        currentEnemy.anim.SetBool("IsWalking", true);
+        currentEnemy.GetComponent<Attack>().damage = 10;
     }
 
     public override void LogicUpdate()
@@ -36,12 +39,12 @@ public class BlackBeastPatrolState : BaseState
     public override void PhysicsUpdate()
     {
         // 检测是否需要翻转方向
-        if (!currentEnemy.FoundPlayer() && currentEnemy.physicsCheck.touchLeftWall)
+        if (currentEnemy is BlackBeast blackBeast && blackBeast.player == null && currentEnemy.physicsCheck.touchLeftWall)
         {
             currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = true;
             currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
         }
-        else if (!currentEnemy.FoundPlayer() && currentEnemy.physicsCheck.touchRightWall)
+        else if (currentEnemy is BlackBeast blackBeast1 && blackBeast1.player == null && currentEnemy.physicsCheck.touchRightWall)
         {
             currentEnemy.anim.gameObject.GetComponent<SpriteRenderer>().flipX = false;
             currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
