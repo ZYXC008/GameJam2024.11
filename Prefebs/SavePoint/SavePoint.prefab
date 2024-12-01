@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6688109361936303255}
   - component: {fileID: 132148311058386609}
   - component: {fileID: 704281416228288676}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SavePoint
   m_TagString: IInteractable
   m_Icon: {fileID: 0}
@@ -165,5 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b22f2d1feb8d4c4a8e684f856b8a49b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   SaveGameEvent: {fileID: 11400000, guid: 6955f92d0ce3ee04db2aa54ef56923a5, type: 2}
   isDone: 0

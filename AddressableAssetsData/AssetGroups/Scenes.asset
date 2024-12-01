@@ -17,38 +17,43 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: bc4671c5c95bbb546961a1849c52ab2b
   m_SerializeEntries:
-  - m_GUID: 02273a3608104f54a833009b9020caaf
-    m_Address: ScondScene.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2cda990e2423bbf4892e6590ba056729
-    m_Address: Persistent.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 632d630faa382474bbe4468cd44eb13b
-    m_Address: ThirdScene.unity
+    m_Address: ThirdScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 02273a3608104f54a833009b9020caaf
+    m_Address: ScondScene
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f0ed1de3e66bd04db3d77129ce8de81
-    m_Address: FifthScene.unity
+    m_Address: FifthScene
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 97c95e81bd5561c4e90f03daea94d58f
-    m_Address: ForthScene.unity
+    m_Address: ForthScene
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e787096758c30624f8699dd9b1572af5
-    m_Address: BossScene.unity
+    m_Address: BossScene
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ef25bec2fbf2188469e8cd6221e02ea0
-    m_Address: FirstScene.unity
+    m_Address: FirstScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34e7e3b50294fec40b6a24fb640a59ce
+    m_Address: Menu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e491604edb5438c488742b7e2a4d4a53
+    m_Address: Persistent
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

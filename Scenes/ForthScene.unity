@@ -2419,8 +2419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadEventSO: {fileID: 11400000, guid: abcf93e6b3fc941458dcc938186ad335, type: 2}
-  sceneToGo: {fileID: 11400000, guid: a8742d846a939f34aadec573fddfa55e, type: 2}
-  positionToGo: {x: -19.16, y: -10.65, z: 0}
+  sceneToGo: {fileID: 11400000, guid: bc269aeed7c728b4a8cc97f7bd239bc6, type: 2}
+  positionToGo: {x: -16.97, y: -4.99, z: 0}
 --- !u!61 &1083910050
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public PlayerStuaBar playerStuaBar;
     public PlayerWeaponController playerWeaponController;
+    public bool  isMenu;
 
     [Header("事件监听")]
     public CharacterEventSO healthEvent;
@@ -25,7 +26,9 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-        if(playerWeaponController.weaponAttack.weaponTag == WeaponType.Normal)
+        if (!isMenu)
+        {
+             if (playerWeaponController.weaponAttack.weaponTag == WeaponType.Normal)
         {
             playerStuaBar.Weapon_Normal.gameObject.SetActive(true);
             playerStuaBar.Weapon_BigArea.gameObject.SetActive(false);
@@ -39,11 +42,13 @@ public class UIManager : MonoBehaviour
         {
             playerStuaBar.Skill_Stop.gameObject.SetActive(true);
         }
+        }
+       
     }
     private void OnLoadEvent(GameSceneSO sceneToLoad, Vector3 arg1, bool arg2)
     {
-        var isMemu = sceneToLoad.sceneType == SceneType.Menu;
-        playerStuaBar.gameObject.SetActive(!isMemu);
+        isMenu = sceneToLoad.sceneType == SceneType.Menu;
+        playerStuaBar.gameObject.SetActive(!isMenu);
     }
 
     private void OnHealthEvent(Character character)

@@ -33,8 +33,8 @@ public class SceneLoader : MonoBehaviour, ISaveable
     private void Start()
     {
         //完成标题界面后解除注释，并注释NewGame()
-        //loadEventSO.RaiseLoadRequestEvent(menuScene, menuPositon, true);
-        NewGame();
+        loadEventSO.RaiseLoadRequestEvent(menuScene, menuPositon, true);
+        //NewGame();
     }
     private void NewGame()
     {
