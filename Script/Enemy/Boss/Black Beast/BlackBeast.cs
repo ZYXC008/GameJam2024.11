@@ -13,9 +13,11 @@ public class BlackBeast : EnemyBase
     //public Vector2 JumpAttackBoxSize = new Vector2(3, 3);
     public float jumpAttackRadius;
     public Transform jumpAttackPos;
+    public float sideAttackRadius;
+    public Transform sideAttackPos;
     [HideInInspector] public Transform player;       // 当前锁定的玩家
     [HideInInspector] public Transform target;
-    private float distanceToPlayer; // 距离玩家的距离
+    public float distanceToPlayer; // 距离玩家的距离
     private AudioSource audioSource;
     public override void Awake()
     {
@@ -111,9 +113,9 @@ public class BlackBeast : EnemyBase
 
         // 根据攻击者位置调整朝向
         if (attackTrans.position.x - transform.position.x > 0)
-            transform.localScale = new Vector3(-2, 2, 1);
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         if (attackTrans.position.x - transform.position.x < 0)
-            transform.localScale = new Vector3(2, 2, 1);
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
         isHurt = true; // 标记受伤
         // 计算受伤的反冲方向
@@ -168,20 +170,20 @@ public class BlackBeast : EnemyBase
     {
 
         //根据与玩家的距离决定攻击方式
-        if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
+        if (distanceToPlayer > 8f)
         {
             changeStateCount = 0;
         }
 
-        //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
-        //{
-        //    changeStateCount = 1;
-        //}
+        if (0 <= distanceToPlayer && distanceToPlayer <= 5.5f)
+        {
+            changeStateCount = 1;
+        }
 
-        //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
-        //{
-        //    changeStateCount = 2;
-        //}
+        if (5.5f < distanceToPlayer && distanceToPlayer <= 8f)
+        {
+            changeStateCount = 2;
+        }
 
 
         // 攻击cd结束后切换状态
@@ -228,12 +230,18 @@ public class BlackBeast : EnemyBase
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(jumpAttackPos.position, jumpAttackRadius);
         }
+        if (sideAttackPos != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(sideAttackPos.position, sideAttackRadius);
+        }
     }
     private IEnumerator ResetColor(SpriteRenderer spriteRenderer)
     {
         yield return new WaitForSeconds(1); // 持续红色 1 秒
         spriteRenderer.color = Color.white;   // 恢复原色
     }
+
     public void JumpAttackPlayer()
     {
         // 获取攻击范围内的玩家对象
@@ -270,11 +278,52 @@ public class BlackBeast : EnemyBase
             }
         }
     }
+
+    public void SideAttackPlayer()
+    {
+        // 获取攻击范围内的玩家对象
+        Collider2D hit = Physics2D.OverlapCircle(sideAttackPos.position, sideAttackRadius, attackLayer);
+
+        if (hit != null)
+        {
+            // 优先尝试直接获取 Character
+            Character character = hit.GetComponent<Character>();
+
+            // 如果直接获取失败，尝试从父级或子级查找
+            if (character == null)
+            {
+                character = hit.GetComponentInParent<Character>();
+            }
+
+            if (character == null)
+            {
+                character = hit.GetComponentInChildren<Character>();
+            }
+
+            // 检查最终是否获取到 Character
+            if (character != null)
+            {
+                Debug.Log("进入攻击状态");
+                Attack attack = jumpAttackPos.gameObject.GetComponent<Attack>();
+                if (attack != null)
+                {
+                    attack.damage = 8;
+                    character.TakeDamage(attack);
+                    Debug.Log($"Hit {character.gameObject.name} for {attack.damage} damage.");
+                }
+
+            }
+        }
+    }
     public void SideAttack()
     {
         GetComponent<Attack>().damage = 8;
     }
 
+    public void SideAttackReverse()
+    {
+        sideAttackPos.localPosition = new Vector3(-sideAttackPos.localPosition.x, sideAttackPos.localPosition.y, sideAttackPos.localPosition.z);
+    }
     public void ResetAttack()
     {
         GetComponent<Attack>().damage = 10;

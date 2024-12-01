@@ -12,7 +12,7 @@ public class BlackBeastSideAttackState : BaseState
     //private int attackCount = 0; // 记录攻击方向和攻击次数
     public override void OnEnter(EnemyBase enemy)
     {
-        Debug.Log("进入黑之兽侧边攻击状态");
+        //Debug.Log("进入黑之兽侧边攻击状态");
         currentEnemy = enemy;
         currentEnemy.currentSpeed = 0;
         //如果动画没有攻击时间则用这个

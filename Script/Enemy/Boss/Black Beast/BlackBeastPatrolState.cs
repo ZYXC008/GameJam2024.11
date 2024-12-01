@@ -10,7 +10,7 @@ public class BlackBeastPatrolState : BaseState
     private int CollideCount;
     public override void OnEnter(EnemyBase enemy)
     {
-        Debug.Log("进入黑之兽巡逻状态");
+        //Debug.Log("进入黑之兽巡逻状态");
         currentEnemy = enemy;
         CollideCount = 0;
         lastCollideTimer = lastCollideTime + 1f; // 防止第一次碰撞时，不触发翻转

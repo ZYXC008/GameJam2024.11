@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5630431468689750831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8137252353427105798}
+  m_Layer: 7
+  m_Name: SideAttackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8137252353427105798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630431468689750831}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.17, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7711717115935577028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6978635819827978700
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +72,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8040655396983963689}
+  - {fileID: 8137252353427105798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8039101314190908338
@@ -133,11 +165,14 @@ MonoBehaviour:
   isDead: 0
   attackTimer: 0
   changeStateCount: 0
-  detectionRadius: 10
-  jumpAttackRadius: 0
+  detectionRadius: 30
+  jumpAttackRadius: 3
   jumpAttackPos: {fileID: 8040655396983963689}
+  sideAttackRadius: 2
+  sideAttackPos: {fileID: 8137252353427105798}
   player: {fileID: 0}
   target: {fileID: 0}
+  distanceToPlayer: 0
 --- !u!114 &1570468523732505037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +264,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  isGround: 0
+  isGround: 1
   touchLeftWall: 0
   touchRightWall: 0
 --- !u!95 &2399888179742804805
@@ -330,8 +365,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0033785063, y: 0.037840847}
-  m_Size: {x: 3.5444076, y: 2.1837626}
+  m_Offset: {x: 0.23864017, y: -0.020477662}
+  m_Size: {x: 3.0603766, y: 2.067149}
   m_Direction: 1
 --- !u!50 &113301832148011579
 Rigidbody2D:
@@ -496,7 +531,7 @@ Transform:
   m_GameObject: {fileID: 8743115139402787081}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.01, y: -0.19, z: -0.04071777}
+  m_LocalPosition: {x: -1.83, y: -0.19, z: -0.04071777}
   m_LocalScale: {x: 0.5025126, y: 0.5025126, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

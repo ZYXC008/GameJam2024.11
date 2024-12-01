@@ -26,7 +26,7 @@ public class PiercerChaseState : BaseState
 
     public override void LogicUpdate()
     {
-        Debug.Log("Piercer Chase");
+        //Debug.Log("Piercer Chase");
 
         if (isChasing && !currentEnemy.isHurt)
         {
