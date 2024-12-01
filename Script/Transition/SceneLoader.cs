@@ -14,6 +14,7 @@ public class SceneLoader : MonoBehaviour, ISaveable
     [Header("ÊÂ¼þ¼àÌý")]
     public SceneLoadEventSO loadEventSO;
     public VoidEventSO newGameEvent;
+    public VoidEventSO backToMenu;
     [Header("¹ã²¥")]
     public VoidEventSO afterSceneLoaderEvent;
     public FadeEventSO fadeEvent;
@@ -46,6 +47,7 @@ public class SceneLoader : MonoBehaviour, ISaveable
     {
         loadEventSO.LoadRequestEvent += OnLoadRequestEvent;
         newGameEvent.OnEventRiased += NewGame;
+        backToMenu.OnEventRiased += BackToMenu;
         ISaveable saveable = this;
         saveable.RegisterSaveData();
     }
@@ -53,8 +55,15 @@ public class SceneLoader : MonoBehaviour, ISaveable
     {
         loadEventSO.LoadRequestEvent -= OnLoadRequestEvent;
         newGameEvent.OnEventRiased -= NewGame;
+        backToMenu.OnEventRiased -= BackToMenu;
         ISaveable saveable = this;
         saveable.UnRegisterSaveData();
+    }
+
+    private void BackToMenu()
+    {
+        sceneToLoad = menuScene;
+        loadEventSO.RaiseLoadRequestEvent(sceneToLoad,menuPositon, true);   
     }
 
     private void OnLoadRequestEvent(GameSceneSO locationToLoad, Vector3 posToGo, bool fadeScreen)

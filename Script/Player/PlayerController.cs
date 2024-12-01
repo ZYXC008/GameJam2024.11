@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [Header("事件监听")]
     public SceneLoadEventSO loadEvent;
     public VoidEventSO afterSceneLoadedEvent;
+    public VoidEventSO backToMenu;
     [Header("基本参数")]
     public float speed;
     public float jumpForce;
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
         //制作场景切换时解除注释
         loadEvent.LoadRequestEvent += OnLoadEvent;
         afterSceneLoadedEvent.OnEventRiased += OnAfterSceneLoadedEvent;
+        backToMenu.OnEventRiased -= BackToMenu;
     }
 
     private void OnDisable()
@@ -78,6 +80,12 @@ public class PlayerController : MonoBehaviour
         inputControl.Disable();
         loadEvent.LoadRequestEvent -= OnLoadEvent;
         afterSceneLoadedEvent.OnEventRiased -= OnAfterSceneLoadedEvent;
+        backToMenu.OnEventRiased -= BackToMenu;
+    }
+
+    private void BackToMenu()
+    {
+        isDead = false;
     }
 
     private void Update()

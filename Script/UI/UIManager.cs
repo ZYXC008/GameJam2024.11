@@ -13,17 +13,29 @@ public class UIManager : MonoBehaviour
     [Header("事件监听")]
     public CharacterEventSO healthEvent;
     public SceneLoadEventSO loadEvent;
+    public VoidEventSO backToMenu;
+
+    [Header("组件")]
+    public GameObject gameOverPanel;
 
     private void OnEnable()
     {
         healthEvent.OnEventRaised += OnHealthEvent;
         loadEvent.LoadRequestEvent += OnLoadEvent;
+        backToMenu.OnEventRiased += BackToMenu;
     }
     private void OnDisable()
     {
         healthEvent.OnEventRaised -= OnHealthEvent;
         loadEvent.LoadRequestEvent -= OnLoadEvent;
+        backToMenu.OnEventRiased -= BackToMenu;
     }
+
+    private void BackToMenu()
+    {
+        gameOverPanel.SetActive(false);
+    }
+
     private void Update()
     {
         if (!isMenu)
