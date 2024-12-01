@@ -8,8 +8,10 @@ public class DreamCorpseElite : EnemyBase
     public float detectionRadius = 5f; // 索敌范围
     public float attackRadius = 3f;  // 攻击范围
     public Transform attackPos; // 攻击位置
-    [HideInInspector] public Transform target; // 玩家目标
+    [HideInInspector] public Transform target; // 攻击目标
+    [HideInInspector] public Transform player; // 玩家目标
     private AudioSource audioSource;
+    private int currentFacingDirection = 1; // 1 表示右，-1 表示左
     public override void Awake()
     {
         base.Awake();
@@ -30,7 +32,7 @@ public class DreamCorpseElite : EnemyBase
     {
         //设置朝向（根据对象的X轴缩放值决定）
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
-
+        player = GameObject.FindWithTag("Player").transform; // 根据标签锁定玩家
         if (!isDead)
         {
             currentState?.LogicUpdate();
@@ -47,6 +49,37 @@ public class DreamCorpseElite : EnemyBase
 
     }
 
+    public override void Move()
+    {
+        if (!PlayerInRangeCircle())
+        {
+            // 基础巡逻移动逻辑
+            base.Move();
+        }
+        else if (PlayerInRangeCircle())
+        {
+            if (player != null)
+            {
+                // 计算敌人到玩家的方向
+                Vector2 direction = (player.position - transform.position).normalized;
+
+                // 根据方向更新 faceDir
+                faceDir = new Vector3(-Mathf.Sign(direction.x), 0, 0);
+
+                // 如果 faceDir 的方向与当前朝向不一致，更新朝向
+                if (Mathf.Sign(transform.localScale.x) != Mathf.Sign(faceDir.x))
+                {
+                    transform.localScale = new Vector3(faceDir.x * Mathf.Abs(transform.localScale.x),
+                        transform.localScale.y,
+                        transform.localScale.z);
+                }
+
+                // 移动敌人朝玩家方向
+                rb.velocity = new Vector2(direction.x * currentSpeed * Time.deltaTime, rb.velocity.y);
+            }
+        }
+    }
+
     public override void OnTakeDamage(Transform attackTrans)
     {
         // 受到攻击时的逻辑
@@ -54,9 +87,9 @@ public class DreamCorpseElite : EnemyBase
 
         // 根据攻击者位置调整朝向
         if (attackTrans.position.x - transform.position.x > 0)
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-2.5f, 2.5f, 1);
         if (attackTrans.position.x - transform.position.x < 0)
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(2.5f, 2.5f, 1);
 
         isHurt = true; // 标记受伤
         // 计算受伤的反冲方向
@@ -72,6 +105,19 @@ public class DreamCorpseElite : EnemyBase
     }
 
     public bool PlayerInRangeCircle()
+    {
+        // 检测玩家是否在索敌范围内
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, attackLayer);
+        if (hit != null)
+        {
+            target = hit.transform;
+            return true;
+        }
+        target = null;
+        return false;
+    }
+
+    public bool AttackPlayerInRangeCircle()
     {
         // 检测玩家是否在面朝方向的索敌范围内
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, attackLayer);

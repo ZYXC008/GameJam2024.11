@@ -33,7 +33,7 @@ public class BlackBeastSideAttackState : BaseState
             currentEnemy.GetComponent<Attack>().enabled = false; // 关闭伤害触发脚本
         }
 
-        if (!currentEnemy.character.stop && currentEnemy.isDead)
+        if (!currentEnemy.character.stop && !currentEnemy.isDead)
         {
             if (speedCount == 0)
             {

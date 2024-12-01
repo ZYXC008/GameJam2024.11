@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class DreamCorpseElitePatrolState : BaseState
 {
@@ -46,7 +47,7 @@ public class DreamCorpseElitePatrolState : BaseState
             currentEnemy.GetComponent<Attack>().enabled = true; // stop标志关闭时开启伤害触发脚本
         }
 
-        if (attackTimer >= attackTime && currentEnemy is DreamCorpseElite elite && elite.PlayerInRangeCircle())
+        if (attackTimer >= attackTime && currentEnemy is DreamCorpseElite elite && elite.AttackPlayerInRangeCircle())
         {
             // 如果玩家进入范围，切换到攻击状态
             currentEnemy.SwichState(NPCState.Attack);
@@ -61,7 +62,7 @@ public class DreamCorpseElitePatrolState : BaseState
             lastCollideTimer = 0;
             CollideCount++;
             // 翻转方向
-            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
+            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, currentEnemy.transform.localScale.y, 1);
         }
     }
 

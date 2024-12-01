@@ -75,7 +75,7 @@ public class Piercer : EnemyBase
     public void AttackSound()
     {
         audioSource.clip = Resources.Load<AudioClip>("Sound/SideAttack");
-        audioSource.volume = 0.5f;
+        audioSource.volume = 0.2f;
         audioSource.Play();
     }
 }

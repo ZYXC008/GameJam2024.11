@@ -10,6 +10,9 @@ public class BlackBeast : EnemyBase
     private float attackTime = 2f;
     public int changeStateCount = 0;
     public float detectionRadius = 10f; //索敌范围
+    //public Vector2 JumpAttackBoxSize = new Vector2(3, 3);
+    public float jumpAttackRadius;
+    public Transform jumpAttackPos;
     [HideInInspector] public Transform player;       // 当前锁定的玩家
     [HideInInspector] public Transform target;
     private float distanceToPlayer; // 距离玩家的距离
@@ -70,6 +73,36 @@ public class BlackBeast : EnemyBase
             }
         }
     }
+    public override void Move()
+    {
+        if (!PlayerInRangeCircle())
+        {
+            // 基础巡逻移动逻辑
+            base.Move();
+        }
+        else if (PlayerInRangeCircle())
+        {
+            if (player != null)
+            {
+                // 计算敌人到玩家的方向
+                Vector2 direction = (player.position - transform.position).normalized;
+
+                // 根据方向更新 faceDir
+                faceDir = new Vector3(-Mathf.Sign(direction.x), 0, 0);
+
+                // 如果 faceDir 的方向与当前朝向不一致，更新朝向
+                if (Mathf.Sign(transform.localScale.x) != Mathf.Sign(faceDir.x))
+                {
+                    transform.localScale = new Vector3(faceDir.x * Mathf.Abs(transform.localScale.x),
+                        transform.localScale.y,
+                        transform.localScale.z);
+                }
+
+                // 移动敌人朝玩家方向
+                rb.velocity = new Vector2(direction.x * currentSpeed * Time.deltaTime, rb.velocity.y);
+            }
+        }
+    }
 
     public override void OnTakeDamage(Transform attackTrans)
     {
@@ -78,9 +111,9 @@ public class BlackBeast : EnemyBase
 
         // 根据攻击者位置调整朝向
         if (attackTrans.position.x - transform.position.x > 0)
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-2, 2, 1);
         if (attackTrans.position.x - transform.position.x < 0)
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(2, 2, 1);
 
         isHurt = true; // 标记受伤
         // 计算受伤的反冲方向
@@ -95,32 +128,32 @@ public class BlackBeast : EnemyBase
         StartCoroutine(ResetColor(spriteRenderer));
     }
 
-    public override void Move()
-    {
-        if (!PlayerInRangeCircle())
-        {
-            // 基础巡逻移动逻辑
-            base.Move();
-        }
+    //public override void Move()
+    //{
+    //    if (!PlayerInRangeCircle())
+    //    {
+    //        // 基础巡逻移动逻辑
+    //        base.Move();
+    //    }
 
-        else if (PlayerInRangeCircle())
-        {
-            if (player != null)
-            {
-                // 计算敌人到玩家的方向
-                Vector2 direction = (player.position - transform.position).normalized;
+    //    else if (PlayerInRangeCircle())
+    //    {
+    //        if (player != null)
+    //        {
+    //            // 计算敌人到玩家的方向
+    //            Vector2 direction = (player.position - transform.position).normalized;
 
-                // 获得朝向
-                faceDir = new Vector2(-Mathf.Sign(direction.x), rb.velocity.y);
+    //            // 获得朝向
+    //            faceDir = new Vector2(-Mathf.Sign(direction.x), rb.velocity.y);
 
-                // 改变黑之兽的朝向
-                transform.localScale = new Vector3(faceDir.x, 1, 1);
+    //            // 改变黑之兽的朝向
+    //            transform.localScale = new Vector3(faceDir.x * transform.localScale.x, transform.localScale.y, 1);
 
-                // 使敌人朝玩家方向移动
-                rb.velocity = direction * currentSpeed * Time.deltaTime;
-            }
-        }
-    }
+    //            // 使敌人朝玩家方向移动
+    //            rb.velocity = direction * currentSpeed * Time.deltaTime;
+    //        }
+    //    }
+    //}
 
     public void ChaseMove()
     {
@@ -135,15 +168,15 @@ public class BlackBeast : EnemyBase
     {
 
         //根据与玩家的距离决定攻击方式
-        //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
-        //{
-        //    changeStateCount = 0;
-        //}
-
         if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
         {
-            changeStateCount = 1;
+            changeStateCount = 0;
         }
+
+        //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
+        //{
+        //    changeStateCount = 1;
+        //}
 
         //if (0 <= distanceToPlayer && distanceToPlayer <= 100000000f)
         //{
@@ -188,13 +221,54 @@ public class BlackBeast : EnemyBase
         // 可视化索敌范围
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        // 可视化跳跃攻击范围
+        if (jumpAttackPos != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(jumpAttackPos.position, jumpAttackRadius);
+        }
     }
     private IEnumerator ResetColor(SpriteRenderer spriteRenderer)
     {
-        anim.speed = 0;
-        yield return new WaitForSeconds(1); // 持续红色 0.5 秒
-        anim.speed = 1;
+        yield return new WaitForSeconds(1); // 持续红色 1 秒
         spriteRenderer.color = Color.white;   // 恢复原色
+    }
+    public void JumpAttackPlayer()
+    {
+        // 获取攻击范围内的玩家对象
+        Collider2D hit = Physics2D.OverlapCircle(jumpAttackPos.position, jumpAttackRadius, attackLayer);
+
+        if (hit != null)
+        {
+            // 优先尝试直接获取 Character
+            Character character = hit.GetComponent<Character>();
+
+            // 如果直接获取失败，尝试从父级或子级查找
+            if (character == null)
+            {
+                character = hit.GetComponentInParent<Character>();
+            }
+
+            if (character == null)
+            {
+                character = hit.GetComponentInChildren<Character>();
+            }
+
+            // 检查最终是否获取到 Character
+            if (character != null)
+            {
+                Debug.Log("进入攻击状态");
+                Attack attack = jumpAttackPos.gameObject.GetComponent<Attack>();
+                if (attack != null)
+                {
+                    attack.damage = 10;
+                    character.TakeDamage(attack);
+                    Debug.Log($"Hit {character.gameObject.name} for {attack.damage} damage.");
+                }
+
+            }
+        }
     }
     public void SideAttack()
     {
@@ -232,7 +306,7 @@ public class BlackBeast : EnemyBase
     public void SideAttackSound()
     {
         audioSource.clip = Resources.Load<AudioClip>("Sound/SideAttack");
-        audioSource.volume = 0.5f;
+        audioSource.volume = 0.2f;
         audioSource.Play();
     }
 }

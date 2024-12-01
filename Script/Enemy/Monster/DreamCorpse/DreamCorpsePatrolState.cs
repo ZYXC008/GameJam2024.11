@@ -55,7 +55,7 @@ public class DreamCorpsePatrolState : BaseState
             lastCollideTimer = 0;
             CollideCount++;
             // 翻转方向
-            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, 1, 1);
+            currentEnemy.transform.localScale = new Vector3(-currentEnemy.transform.localScale.x, currentEnemy.transform.localScale.y, 1);
         }
     }
 

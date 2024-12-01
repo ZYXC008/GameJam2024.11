@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening.Core.Easing;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PiercerChaseState : BaseState
 {
@@ -69,9 +70,22 @@ public class PiercerChaseState : BaseState
                     attackTriggered = true; // 确保只触发一次
                 }
 
-                // 持续追向玩家,仅沿X轴方向追击
-                Vector2 chaseDirection = new Vector2(piercer.target.position.x - piercer.transform.position.x, 0).normalized;
-                piercer.rb.velocity = chaseDirection * piercer.chaseSpeed;
+                // 计算玩家与敌人之间的 X 轴方向
+                float directionX = piercer.target.position.x - piercer.transform.position.x;
+
+                // 根据 X 轴方向更新 faceDir
+                piercer.faceDir = new Vector3(-Mathf.Sign(directionX), 0, 0);
+
+                // 如果 faceDir 的方向与当前朝向不一致，更新朝向
+                if (Mathf.Sign(piercer.transform.localScale.x) != Mathf.Sign(piercer.faceDir.x))
+                {
+                    piercer.transform.localScale = new Vector3(piercer.faceDir.x * Mathf.Abs(piercer.transform.localScale.x),
+                        piercer.transform.localScale.y,
+                        piercer.transform.localScale.z);
+                }
+
+                // 只更新 X 轴的速度，保持 Y 轴速度不变
+                piercer.rb.velocity = new Vector2(Mathf.Sign(directionX) * piercer.currentSpeed, piercer.rb.velocity.y);
             }
             else if (chaseTimer >= chaseTime && !isChaseCoroutineRunning)
             {

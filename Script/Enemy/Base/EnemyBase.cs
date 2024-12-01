@@ -178,9 +178,9 @@ public class EnemyBase : MonoBehaviour
 
         // 根据攻击者位置调整朝向
         if (attackTrans.position.x - transform.position.x > 0)
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         if (attackTrans.position.x - transform.position.x < 0)
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
         isHurt = true; // 标记受伤
         // 计算受伤的反冲方向
